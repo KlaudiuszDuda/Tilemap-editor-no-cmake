@@ -27,7 +27,7 @@ TilemapRender::TilemapRender()
 	glBindTexture(GL_TEXTURE_2D, texture);
 
 	int width, height, channels;
-	uchar* data = stbi_load("C:/Users/D3032328/Downloads/test tilemap editor/resources/CosmicLilac_Tiles.png", &width, &height, &channels, 0);
+	uchar* data = stbi_load("resources/CosmicLilac_Tiles.png", &width, &height, &channels, 0);
 
 	GLenum format = channels == 4 ? GL_RGBA : GL_RGB;
 
@@ -39,7 +39,7 @@ TilemapRender::TilemapRender()
 
 	stbi_image_free(data);
 
-	shader.LoadShader("C:/Users/D3032328/Downloads/test tilemap editor/resources/vertex.vert", "C:/Users/D3032328/Downloads/test tilemap editor/resources/fragment.frag");
+	shader.LoadShader("resources/vertex.vert", "resources/fragment.frag");
 	shader.bind();
 
 	shader.SetVector2i("atlasTileSize", width / 16, height / 16);

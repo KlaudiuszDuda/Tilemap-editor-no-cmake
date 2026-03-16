@@ -1,97 +1,47 @@
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of EntryPoint.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\EntryPoint.cpp, src\Src\application\EntryPoint.cpp.
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of main.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\main.cpp, src\Src\application\main.cpp.
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of TilemapRender.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\Src\engine\TilemapRender.cpp, src\TilemapRender.cpp.
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of Viewport.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\Src\engine\Viewport.cpp, src\Viewport.cpp.
-C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of Window.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are src\Src\engine\Window.cpp, src\Window.cpp.
-  EntryPoint.cpp
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  main.cpp
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  EntryPoint.cpp
-/src/Src/application/EntryPoint.cpp(1,1): error C1083: Cannot open source file: 'src\Src\application\EntryPoint.cpp': No such file or directory
-  main.cpp
-/src/Src/application/main.cpp(1,1): error C1083: Cannot open source file: 'src\Src\application\main.cpp': No such file or directory
-  imguiTools.cpp
-/src/Src/engine/imguiTools.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\imguiTools.cpp': No such file or directory
-  logs.cpp
-/src/Src/engine/logs.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\logs.cpp': No such file or directory
-  platformTools.cpp
-/src/Src/engine/platformTools.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\platformTools.cpp': No such file or directory
-  profiler.cpp
-/src/Src/engine/profiler.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\profiler.cpp': No such file or directory
-  TilemapRender.cpp
-/src/Src/engine/TilemapRender.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\TilemapRender.cpp': No such file or directory
-  Viewport.cpp
-/src/Src/engine/Viewport.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\Viewport.cpp': No such file or directory
-  Window.cpp
-/src/Src/engine/Window.cpp(1,1): error C1083: Cannot open source file: 'src\Src\engine\Window.cpp': No such file or directory
-  TilemapRender.cpp
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(59,28): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(59,28): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(59,28): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(59,28): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(59,28): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(63,28): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(63,28): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(63,28): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(63,28): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(63,28): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(67,28): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(67,28): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(67,28): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(67,28): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(67,28): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(71,28): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(71,28): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(71,28): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(71,28): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(71,28): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(75,28): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(75,28): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(75,28): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(75,28): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(75,28): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(79,28): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(79,28): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(79,28): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(79,28): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\TilemapRender.cpp(79,28): warning C4244:         ]
-  Viewport.cpp
-  Window.cpp
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(91,76): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(97,78): warning C4244: '=': conversion from 'f64' to 'f32', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(122,196): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(136,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(136,26): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(136,26): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(136,26): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(136,26): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(137,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(137,26): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(137,26): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(137,26): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(137,26): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,79): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,79): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,79): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,79): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,79): warning C4244:         ]
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,54): warning C4244:         with
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,54): warning C4244:         [
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,54): warning C4244:             T=float
-C:\Users\D3032328\Downloads\test tilemap editor\src\Window.cpp(234,54): warning C4244:         ]
-  Generating Code...
+﻿  TilemapRender.cpp
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'src/TilemapRender.cpp')
+  
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'src/TilemapRender.cpp')
+  
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'src/TilemapRender.cpp')
+  
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'src/TilemapRender.cpp')
+  
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'src/TilemapRender.cpp')
+  
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(59,28): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(59,28): warning C4244:         with
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(59,28): warning C4244:         [
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(59,28): warning C4244:             T=float
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(59,28): warning C4244:         ]
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(63,28): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(63,28): warning C4244:         with
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(63,28): warning C4244:         [
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(63,28): warning C4244:             T=float
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(63,28): warning C4244:         ]
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(67,28): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(67,28): warning C4244:         with
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(67,28): warning C4244:         [
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(67,28): warning C4244:             T=float
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(67,28): warning C4244:         ]
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(71,28): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(71,28): warning C4244:         with
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(71,28): warning C4244:         [
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(71,28): warning C4244:             T=float
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(71,28): warning C4244:         ]
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(75,28): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(75,28): warning C4244:         with
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(75,28): warning C4244:         [
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(75,28): warning C4244:             T=float
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(75,28): warning C4244:         ]
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(79,28): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(79,28): warning C4244:         with
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(79,28): warning C4244:         [
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(79,28): warning C4244:             T=float
+C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\TilemapRender.cpp(79,28): warning C4244:         ]
+  test tilemap editor.vcxproj -> C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\x64\Debug\test tilemap editor.exe

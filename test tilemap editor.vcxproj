@@ -142,51 +142,27 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="src\EntryPoint.cpp" />
-    <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\Src\application\EntryPoint.cpp" />
-    <ClCompile Include="src\Src\application\main.cpp" />
-    <ClCompile Include="src\Src\engine\imguiTools.cpp" />
-    <ClCompile Include="src\Src\engine\logs.cpp" />
-    <ClCompile Include="src\Src\engine\platformTools.cpp" />
-    <ClCompile Include="src\Src\engine\profiler.cpp" />
-    <ClCompile Include="src\Src\engine\TilemapRender.cpp" />
-    <ClCompile Include="src\Src\engine\Viewport.cpp" />
-    <ClCompile Include="src\Src\engine\Window.cpp" />
-    <ClCompile Include="src\TilemapRender.cpp" />
-    <ClCompile Include="src\Viewport.cpp" />
-    <ClCompile Include="src\Window.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\Allocator.h" />
-    <ClInclude Include="src\BufferObject.h" />
-    <ClInclude Include="src\Consts.h" />
-    <ClInclude Include="src\Entity.h" />
-    <ClInclude Include="src\EntryPoint.h" />
-    <ClInclude Include="src\include\application\EntryPoint.h" />
-    <ClInclude Include="src\include\engine\Allocator.h" />
-    <ClInclude Include="src\include\engine\BufferObject.h" />
-    <ClInclude Include="src\include\engine\Consts.h" />
-    <ClInclude Include="src\include\engine\Entity.h" />
-    <ClInclude Include="src\include\engine\imguiTools.h" />
-    <ClInclude Include="src\include\engine\logs.h" />
-    <ClInclude Include="src\include\engine\platformTools.h" />
-    <ClInclude Include="src\include\engine\profiler.h" />
-    <ClInclude Include="src\include\engine\Shader.h" />
-    <ClInclude Include="src\include\engine\Syncing.h" />
-    <ClInclude Include="src\include\engine\TilemapRender.h" />
-    <ClInclude Include="src\include\engine\types.h" />
-    <ClInclude Include="src\include\engine\Viewport.h" />
-    <ClInclude Include="src\include\engine\Window.h" />
-    <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\stb_image.h" />
-    <ClInclude Include="src\Syncing.h" />
-    <ClInclude Include="src\TilemapRender.h" />
-    <ClInclude Include="src\types.h" />
-    <ClInclude Include="src\Viewport.h" />
-    <ClInclude Include="src\Window.h" />
-  </ItemGroup>
+<ItemGroup>
+  <ClCompile Include="src\EntryPoint.cpp" />
+  <ClCompile Include="src\main.cpp" />
+  <ClCompile Include="src\TilemapRender.cpp" />
+  <ClCompile Include="src\Viewport.cpp" />
+  <ClCompile Include="src\Window.cpp" />
+</ItemGroup>
+<ItemGroup>
+  <ClInclude Include="src\Allocator.h" />
+  <ClInclude Include="src\BufferObject.h" />
+  <ClInclude Include="src\Consts.h" />
+  <ClInclude Include="src\Entity.h" />
+  <ClInclude Include="src\EntryPoint.h" />
+  <ClInclude Include="src\Shader.h" />
+  <ClInclude Include="src\Syncing.h" />
+  <ClInclude Include="src\TilemapRender.h" />
+  <ClInclude Include="src\types.h" />
+  <ClInclude Include="src\Viewport.h" />
+  <ClInclude Include="src\Window.h" />
+  <ClInclude Include="src\stb_image.h" />
+</ItemGroup>
   <ItemGroup>
     <Font Include="resources\arial.ttf" />
     <Font Include="resources\fontawesome-webfont.ttf" />
