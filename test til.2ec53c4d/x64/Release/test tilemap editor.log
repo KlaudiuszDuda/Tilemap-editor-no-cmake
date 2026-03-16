@@ -1,0 +1,3 @@
+﻿  Main.cpp
+Main.obj : error LNK2001: unresolved external symbol glewInit
+C:\Users\D3032328\Downloads\test tilemap editor\x64\Release\test tilemap editor.exe : fatal error LNK1120: 1 unresolved externals
