@@ -125,6 +125,26 @@ namespace kl
             return growAndAlloc(dst, src, size);
         }
 
+        template<typename T>
+        inline u32 alloc_fill(T* dst, u32 size, T initializeTo) {
+            for (u32 i = 0; i < m_FreeBlocks.size(); ++i) {
+                Block& b = m_FreeBlocks[i];
+                if (b.size >= size) {
+                    u32 offset = b.offset;
+                    b.offset += size;
+                    b.size -= size;
+
+                    if (b.size == 0) {
+                        m_FreeBlocks.erase(m_FreeBlocks.begin() + i);
+                    }
+
+                    std::fill(dst, size + dst, initializeTo);
+
+                    return offset;
+                }
+            }
+        }
+
         inline void freeRegion(Block& block) {
             if (block.offset == 0u - 1) { return; }
             m_FreeBlocks.push_back({ block.offset, block.size });

@@ -1,4 +1,5 @@
 #include "Window.h"
+#include "Viewport.h"
 
 Callback callback;
 Input input;
@@ -149,9 +150,9 @@ i32 Input::getKeyboard(u32 index)
     return callback.m_InputData.digital[index];
 }
 
-f32 Input::getMouseButton(u32 index)
+i32 Input::getMouseButton(u32 index)
 {
-    return callback.m_InputData.analog[GLFW_KEY_LAST + 1 + index];
+    return callback.m_InputData.digital[GLFW_KEY_LAST + 1 + index];
 }
 
 f32 Input::getScrollWheel()
@@ -280,6 +281,39 @@ glm::vec2 Window::getMousePosition()
     f64 mouseX, mouseY;
     glfwGetCursorPos(p_Window, &mouseX, &mouseY);
     return glm::vec2((f32)mouseX, (f32)mouseY);
+}
+
+glm::vec3 Window::getWorldMousePosition(Viewport& viewport)
+{
+    f32 my;
+    my = window.getWindowSize().y - window.getMousePosition().y;
+
+    float x = (2.0f * window.getMousePosition().x) / window.getWindowSize().x - 1.0f;
+    float y = (2.0f * my) / window.getWindowSize().y - 1.0f;
+
+    glm::vec4 startNDC(x, y, -1.0f, 1.0f);
+    glm::vec4 endNDC(x, y, 1.0f, 1.0f);
+
+    glm::mat4 invVP = glm::inverse(viewport.getProjection() * viewport.getView());
+
+    glm::vec4 startW = invVP * startNDC;
+    startW /= startW.w;
+    glm::vec4 endW = invVP * endNDC;
+    endW /= endW.w;
+
+    glm::vec3 rayOrigin = glm::vec3(startW);
+    glm::vec3 rayDir = glm::normalize(glm::vec3(endW - startW));
+
+    // Intersect with Z=0 plane
+    float t = -rayOrigin.z / rayDir.z;
+    glm::vec3 worldPos = rayOrigin + t * rayDir;
+
+    return worldPos;
+
+    std::cout << "World pos = "
+        << worldPos.x << ", "
+        << worldPos.y << ", "
+        << worldPos.z << std::endl;
 }
 
 void Window::SwapBuffer()

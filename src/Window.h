@@ -9,6 +9,8 @@
 
 #include "types.h"
 
+class Viewport;
+
 enum class MappedInput
 {
 	W,
@@ -52,7 +54,7 @@ public:
 	Input();
 
 	i32 getKeyboard(u32 index);
-	f32 getMouseButton(u32 index);
+	i32 getMouseButton(u32 index);
 	f32 getScrollWheel();
 	i32 getGamepadButton(u32 index, u32 joystickId);
 	f32 getGamepadAxis(u32 index, u32 joystickId);
@@ -119,6 +121,7 @@ public:
 
 	glm::vec2& getWindowSize();
 	glm::vec2 getMousePosition();
+	glm::vec3 getWorldMousePosition(Viewport& viewport);
 	void SwapBuffer();
 	void PollEvents();
 	GLFWwindow*& getWindowPointer();
