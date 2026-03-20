@@ -1,7 +1,8 @@
 #version 430 core
 
 layout (location = 0) in uint textureData;
-layout (location = 1) in uint baseInstance;
+layout (location = 1) in uint baseInstanceX;
+layout (location = 2) in uint baseInstanceY;
 
 out vec2 TexCoord;
 
@@ -22,8 +23,8 @@ void main()
 
     TexCoord = vec2(u, v);
 
-    float x = float(gl_InstanceID % 8) + baseInstance % tilemapChunkSize.x * 8;
-    float y = float(gl_InstanceID / 8) + baseInstance / tilemapChunkSize.y * 8;
+    float x = float(gl_InstanceID % 8) + baseInstanceX * 8;
+    float y = float(gl_InstanceID / 8) + baseInstanceY * 8;
 
     float px = x + float(vx);
     float py = y + float(vy);

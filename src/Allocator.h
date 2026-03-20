@@ -81,18 +81,24 @@ namespace kl
         ::operator delete(data);
     }
 
+    struct Block {
+        u32 m_Offset;
+        u32 m_Size;
+
+        Block(u32 offset, u32 size)
+        {
+            m_Offset = offset;
+            m_Size = size;
+        }
+    };
+
     class ChunkBufferAllocator {
     public:
-        struct Block {
-            u32 offset;
-            u32 size;
-        };
-
         inline void init(u32 bufferSize)
         {
             m_BufferSize = bufferSize;
             m_Buffer.BindBuffer(GL_ARRAY_BUFFER, 0);
-            m_Buffer.BufferData(GL_ARRAY_BUFFER, m_BufferSize, nullptr, GL_DYNAMIC_DRAW);
+            m_Buffer.BufferData(GL_ARRAY_BUFFER, m_BufferSize, nullptr, GL_DYNAMIC_COPY);
     
             m_FreeBlocks.push_back({ 0, m_BufferSize });
         }
@@ -104,41 +110,38 @@ namespace kl
         
         // allocate a region of `size` bytes
         // returns offset or (size_t)-1 on failure
-        inline u32 alloc(void* dst, void const* src, u32 size) {
+        inline u32 alloc(u32 size) {
             for (u32 i = 0; i < m_FreeBlocks.size(); ++i) {
                 Block& b = m_FreeBlocks[i];
-                if (b.size >= size) {
-                    u32 offset = b.offset;
-                    b.offset += size;
-                    b.size -= size;
+                if (b.m_Size >= size) {
+                    u32 offset = b.m_Offset;
+                    b.m_Offset += size;
+                    b.m_Size -= size;
     
-                    if (b.size == 0) {
+                    if (b.m_Size == 0) {
                         m_FreeBlocks.erase(m_FreeBlocks.begin() + i);
                     }
-
-                    memcpy((u8*)dst + offset, src , size);
     
                     return offset;
                 }
             }
 
-            return growAndAlloc(dst, src, size);
+            return growAndAlloc(size);
         }
 
-        template<typename T>
-        inline u32 alloc_fill(T* dst, u32 size, T initializeTo) {
+        inline u32 alloc_init(void* dst, u32 size) {
             for (u32 i = 0; i < m_FreeBlocks.size(); ++i) {
                 Block& b = m_FreeBlocks[i];
-                if (b.size >= size) {
-                    u32 offset = b.offset;
-                    b.offset += size;
-                    b.size -= size;
+                if (b.m_Size >= size) {
+                    u32 offset = b.m_Offset;
+                    b.m_Offset += size;
+                    b.m_Size -= size;
 
-                    if (b.size == 0) {
+                    if (b.m_Size == 0) {
                         m_FreeBlocks.erase(m_FreeBlocks.begin() + i);
                     }
 
-                    std::fill(dst, size + dst, initializeTo);
+                    memset((u8*)dst + offset, 0, size);
 
                     return offset;
                 }
@@ -146,8 +149,8 @@ namespace kl
         }
 
         inline void freeRegion(Block& block) {
-            if (block.offset == 0u - 1) { return; }
-            m_FreeBlocks.push_back({ block.offset, block.size });
+            if (block.m_Offset == 0u - 1) { return; }
+            m_FreeBlocks.push_back({ block.m_Offset, block.m_Size });
             mergeFreeBlocks();
         }
 
@@ -160,12 +163,12 @@ namespace kl
         // merge adjacent free blocks
         void mergeFreeBlocks() {
             std::sort(m_FreeBlocks.begin(), m_FreeBlocks.end(),
-                [](auto& a, auto& b) { return a.offset < b.offset; });
+                [](auto& a, auto& b) { return a.m_Offset < b.m_Offset; });
     
             for (u32 i = 0; i + 1 < m_FreeBlocks.size();) {
-                if (m_FreeBlocks[i].offset + m_FreeBlocks[i].size
-                    == m_FreeBlocks[i + 1].offset) {
-                    m_FreeBlocks[i].size += m_FreeBlocks[i + 1].size;
+                if (m_FreeBlocks[i].m_Offset + m_FreeBlocks[i].m_Size
+                    == m_FreeBlocks[i + 1].m_Offset) {
+                    m_FreeBlocks[i].m_Size += m_FreeBlocks[i + 1].m_Size;
                     m_FreeBlocks.erase(m_FreeBlocks.begin() + i + 1);
                 }
                 else {
@@ -174,7 +177,7 @@ namespace kl
             }
         }
 
-        u32 growAndAlloc(void* dst, void const* src, u32 size) {
+        u32 growAndAlloc(u32 size) {
             u32 oldSize = m_BufferSize;
             u32 newSize = m_BufferSize * 2;
     
@@ -196,7 +199,7 @@ namespace kl
     
             mergeFreeBlocks();
     
-            return alloc(dst, src, size);
+            return alloc(size);
         }
     };
 }

@@ -8,20 +8,21 @@
 #include "Consts.h"
 #include "Syncing.h"
 
-struct Block {
-	u32 m_Offset;
-	u32 m_Size;
-
-	Block(u32 offset, u32 size)
-	{
-		m_Offset = offset;
-		m_Size = size;
-	}
-};
-
 struct tileChunk {
-	u32 offset;
-	u32 index;
+	u32 oldOffset;
+	u32 newOffset;
+	u32 chunkIndex;
+
+	tileChunk(u32 oldoffset, u32 newoffset, u32 chunkindex)
+	{
+		oldOffset = oldoffset;
+		newOffset = newoffset;
+		chunkIndex = chunkindex;
+	}
+	tileChunk()
+	{
+
+	}
 };
 
 class TilemapRender
@@ -41,8 +42,9 @@ private:
 	std::vector<u32> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
 	std::vector<tileChunk> transferingTilemapChunkPointer;
-	u32 freeSlot;
-	u32 needToBeFreed = 0u - 1;
+	std::unordered_map<u32, u32> tileChunkIndex;
+
+	u32 freeBufferSlot;
 
 	Syncing fence;
 	VertexArray<1> textureVertexArray;
@@ -52,7 +54,7 @@ private:
 	i32 tilemapChunkSizeX;
 	i32 tilemapChunkSizeY;
 
-	u32 lastTileIndex = 0;
+	u32 lastTileIndex = 0u-1;
 
 	Viewport camera;
 };
