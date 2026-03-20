@@ -19,6 +19,8 @@ enum class MappedInput
 	D,
 	E,
 	Q,
+	Z,
+	X,
 	CAPS_LOCK,
 	ESC,
 	LSHIFT,

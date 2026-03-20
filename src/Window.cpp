@@ -74,6 +74,8 @@ Input::Input()
     MapKeyToAction(MappedInput::D, GLFW_KEY_D);
     MapKeyToAction(MappedInput::E, GLFW_KEY_E);
     MapKeyToAction(MappedInput::Q, GLFW_KEY_Q);
+    MapKeyToAction(MappedInput::Z, GLFW_KEY_Z);
+    MapKeyToAction(MappedInput::X, GLFW_KEY_X);
     MapKeyToAction(MappedInput::CAPS_LOCK, GLFW_KEY_CAPS_LOCK);
     MapKeyToAction(MappedInput::ESC, GLFW_KEY_ESCAPE);
     MapKeyToAction(MappedInput::LSHIFT, GLFW_KEY_LEFT_SHIFT);

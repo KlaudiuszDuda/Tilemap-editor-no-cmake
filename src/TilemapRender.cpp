@@ -4,8 +4,8 @@
 
 TilemapRender::TilemapRender()
 {
-	tilemapChunkSizeX = 7;
-	tilemapChunkSizeY = 5;
+	tilemapChunkSizeX = 4;
+	tilemapChunkSizeY = 4;
 
 	tilemapBuffer.resize(tilemapChunkSizeX * tilemapChunkSizeY * CHUNK_SIZE_SQUARED);
 	tilemapChunkPointer.resize(tilemapChunkSizeX * tilemapChunkSizeY);
@@ -36,7 +36,7 @@ TilemapRender::TilemapRender()
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 
-	int width, height, channels;
+	int channels;
 	uchar* data = stbi_load("resources/CosmicLilac_Tiles.png", &width, &height, &channels, 0);
 
 	GLenum format = channels == 4 ? GL_RGBA : GL_RGB;
@@ -52,7 +52,10 @@ TilemapRender::TilemapRender()
 	shader.LoadShader("resources/vertex.vert", "resources/fragment.frag");
 	shader.bind();
 
-	shader.SetVector2i("atlasTileSize", width / 16, height / 16);
+	width /= 16;
+	height /= 16;
+
+	shader.SetVector2i("atlasTileSize", width, height);
 	shader.SetVector2i("tilemapChunkSize", tilemapChunkSizeX, tilemapChunkSizeY);
 	shader.SetInt("TextureAtlasID", 0);
 }
@@ -88,6 +91,14 @@ void TilemapRender::updateCamera()
 	{
 		camera.Position.z += Time.dt * 5;
 	}
+	if (input.isActionActiveDigital(MappedInput::Z, GLFW_PRESS))
+	{
+		textureSelected--;
+	}
+	if (input.isActionActiveDigital(MappedInput::X, GLFW_PRESS))
+	{
+		textureSelected++;
+	}
 }
 
 void TilemapRender::updateCanvasEdit()
@@ -116,7 +127,7 @@ void TilemapRender::updateCanvasEdit()
 			if (lastTileIndex == mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
-			tilemapBuffer[lastTileIndex] = 1u;
+			tilemapBuffer[lastTileIndex] = textureSelected;
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(u32));
 
