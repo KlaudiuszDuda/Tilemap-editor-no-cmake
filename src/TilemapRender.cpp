@@ -91,11 +91,13 @@ void TilemapRender::updateCamera()
 	{
 		camera.Position.z += Time.dt * 5;
 	}
-	if (input.isActionActiveDigital(MappedInput::Z, GLFW_PRESS))
+	
+	if (input.isActionActive(MappedInput::Z))
 	{
 		textureSelected--;
 	}
-	if (input.isActionActiveDigital(MappedInput::X, GLFW_PRESS))
+
+	if (input.isActionActive(MappedInput::X))
 	{
 		textureSelected++;
 	}

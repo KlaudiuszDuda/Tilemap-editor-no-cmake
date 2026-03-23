@@ -15,13 +15,16 @@ void main()
     uint tileX = textureData % atlasTileSize.x;
     uint tileY = textureData / atlasTileSize.x;
 
-    int vx = gl_VertexID % 2;
-    int vy = (gl_VertexID / 2) % 2;
+    int ux = gl_VertexID % 2;
+    int uy = (gl_VertexID / 2) % 2;
 
-    float u = float(tileX + vx) / float(atlasTileSize.x);
-    float v = float(tileY + vy) / float(atlasTileSize.y);
+    float u = float(tileX + ux) / float(atlasTileSize.x);
+    float v = float(tileY + uy) / float(atlasTileSize.y);
 
     TexCoord = vec2(u, v);
+    
+    int vx = gl_VertexID % 2;
+    int vy = (gl_VertexID / 2) % 2;
 
     float x = float(gl_InstanceID % 8) + baseInstanceX * 8;
     float y = float(gl_InstanceID / 8) + baseInstanceY * 8;
