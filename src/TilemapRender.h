@@ -45,6 +45,7 @@ private:
 	std::unordered_map<u32, u32> tileChunkIndex;
 
 	u32 textureSelected = 0;
+	u32 tileActionType = 0;;
 
 	Syncing fence;
 	VertexArray<1> textureVertexArray;

@@ -20,7 +20,7 @@ TilemapRender::TilemapRender()
 
 	for (u32 i = 0; i < tilemapChunkSizeX * tilemapChunkSizeY; i++)
 	{
-		transferingTilemapChunkPointer[i].oldOffset = 0u-1;
+		transferingTilemapChunkPointer[i].oldOffset = 0u - 1;
 		transferingTilemapChunkPointer[i].newOffset = textureTileData.alloc_init(dst, CHUNK_SIZE_SQUARED * sizeof(u32));
 		transferingTilemapChunkPointer[i].chunkIndex = i;
 	}
@@ -91,15 +91,27 @@ void TilemapRender::updateCamera()
 	{
 		camera.Position.z += Time.dt * 5;
 	}
-	
+
 	if (input.isActionActive(MappedInput::Z))
 	{
 		textureSelected--;
 	}
-
 	if (input.isActionActive(MappedInput::X))
 	{
 		textureSelected++;
+	}
+
+	if (input.isActionActive(MappedInput::T))
+	{
+		tileActionType = 0;
+	}
+	if (input.isActionActive(MappedInput::R))
+	{
+		tileActionType = 1;
+	}
+	if (input.isActionActive(MappedInput::F))
+	{
+		tileActionType = 2;
 	}
 }
 
@@ -114,13 +126,13 @@ void TilemapRender::updateCanvasEdit()
 		glm::ivec3 mouseWorldPosition = window.getWorldMousePosition(camera);
 		u32 mouseWorldPositionX = mouseWorldPosition.x;
 		u32 mouseWorldPositionY = mouseWorldPosition.y;
-		
+
 		u32 mouseWorldChunkPositionX = mouseWorldPositionX / CHUNK_SIZE;
 		u32 mouseWorldChunkPositionY = mouseWorldPositionY / CHUNK_SIZE;
-		
+
 		u32 mouseWorldChunkPositionIndexX = mouseWorldPositionX % CHUNK_SIZE;
 		u32 mouseWorldChunkPositionIndexY = mouseWorldPositionY % CHUNK_SIZE;
-		
+
 		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSizeX;
 		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
 
@@ -129,7 +141,30 @@ void TilemapRender::updateCanvasEdit()
 			if (lastTileIndex == mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
-			tilemapBuffer[lastTileIndex] = textureSelected;
+			if (tileActionType == 0)
+			{
+				tilemapBuffer[lastTileIndex] = textureSelected;
+			}
+			if (tileActionType == 1)
+			{
+				u32 rotation = ((((tilemapBuffer[lastTileIndex] >> 8) & 3u) + 1) % 4);
+				u32 bits = (rotation << 8);
+				u32 mask = bits;
+				mask |= 255;
+				mask |= (1u << 21u) << 10u;
+				tilemapBuffer[lastTileIndex] &= mask;
+				tilemapBuffer[lastTileIndex] |= bits;
+			}
+			if (tileActionType == 2)
+			{
+				u32 flip = ((((tilemapBuffer[lastTileIndex] >> 10) & 1u) + 1) % 2);
+				u32 bits = (flip << 10);
+				u32 mask = bits;
+				mask |= 1023;
+				mask |= (1u << 19u) << 8u;
+				tilemapBuffer[lastTileIndex] &= mask;
+				tilemapBuffer[lastTileIndex] |= bits;
+			}
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(u32));
 
@@ -171,13 +206,13 @@ void TilemapRender::draw()
 		transferingTilemapChunkPointer.clear();
 	}
 	shader.SetMatrix4("viewAndProjection", camera.getViewAndProjection());
-	
+
 	const Frustum camFrustum = createFrustumFromCamera(camera, window.getWindowSize().x / window.getWindowSize().y, glm::radians(camera.Fov), 0.1f, 100000.0f);
 	for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
 	{
 		i32 x = i % tilemapChunkSizeX;
 		i32 y = i / tilemapChunkSizeX;
-	
+
 		if (isAABBOnFrustum(setAABB({ x * CHUNK_SIZE, y * CHUNK_SIZE, 0 }, { (x + 1) * CHUNK_SIZE, (y + 1) * CHUNK_SIZE, 0 }), camFrustum))
 		{
 			textureVertexArray.VertexAttribI1ui(1, x);
