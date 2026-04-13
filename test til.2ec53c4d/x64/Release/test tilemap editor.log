@@ -1,89 +1,31 @@
-﻿  EntryPoint.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  main.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  TilemapRender.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(21,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(72,32): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(72,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(72,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(72,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(72,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(76,32): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(76,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(76,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(76,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(76,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(80,32): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(80,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(80,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(80,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(80,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(84,32): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(84,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(84,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(84,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(84,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(88,32): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(88,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(88,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(88,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(88,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(92,32): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(92,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(92,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(92,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(92,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(127,28): warning C4018: '<': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(185,80): warning C4312: 'type cast': conversion from '_Ty' to 'void *' of greater size
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(185,80): warning C4312:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(185,80): warning C4312:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(185,80): warning C4312:             _Ty=u32
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(185,80): warning C4312:         ]
-  Viewport.cpp
-  Window.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(94,76): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(100,78): warning C4244: '=': conversion from 'f64' to 'f32', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(125,196): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(139,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(139,26): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(139,26): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(139,26): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(139,26): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(140,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(140,26): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(140,26): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(140,26): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(140,26): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,79): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,79): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,79): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,79): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,79): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,54): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,54): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,54): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(237,54): warning C4244:         ]
+﻿  Window.cpp
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(114,78): warning C4244: '=': conversion from 'f64' to 'f32', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(139,196): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(153,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(153,26): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(153,26): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(153,26): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(153,26): warning C4244:         ]
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(154,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(154,26): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(154,26): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(154,26): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(154,26): warning C4244:         ]
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,79): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,79): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,79): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,79): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,79): warning C4244:         ]
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,54): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,54): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,54): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(251,54): warning C4244:         ]
 LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
   Generating code
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Allocator.h(149): warning C4715: 'kl::ChunkBufferAllocator::alloc_init': not all control paths return a value
-  768 of 780 functions (98.5%) were compiled, the rest were copied from previous compilation.
-    68 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  6 of 780 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    8 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
 glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
   test tilemap editor.vcxproj -> C:\Users\D3032328\Downloads\Tilemap editor no cmake\x64\Release\test tilemap editor.exe

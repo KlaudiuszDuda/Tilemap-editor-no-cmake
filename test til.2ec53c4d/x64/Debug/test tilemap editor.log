@@ -1,24 +1,24 @@
 ﻿  Window.cpp
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(117,78): warning C4244: '=': conversion from 'f64' to 'f32', possible loss of data
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(142,196): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(156,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(156,26): warning C4244:         with
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(156,26): warning C4244:         [
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(156,26): warning C4244:             T=float
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(156,26): warning C4244:         ]
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(157,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(157,26): warning C4244:         with
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(157,26): warning C4244:         [
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(157,26): warning C4244:             T=float
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(157,26): warning C4244:         ]
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,79): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,79): warning C4244:         with
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,79): warning C4244:         [
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,79): warning C4244:             T=float
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,79): warning C4244:         ]
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,54): warning C4244:         with
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,54): warning C4244:         [
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,54): warning C4244:             T=float
-C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\src\Window.cpp(254,54): warning C4244:         ]
-  test tilemap editor.vcxproj -> C:\dev\c++\drawing libraries\openGL\openGL projects\Tilemap-editor-no-cmake\x64\Debug\test tilemap editor.exe
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(103,78): warning C4244: '=': conversion from 'f64' to 'f32', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(128,196): warning C4244: '=': conversion from 'f32' to 'i32', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(142,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(142,26): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(142,26): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(142,26): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(142,26): warning C4244:         ]
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(143,26): warning C4244: '=': conversion from 'i32' to 'T', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(143,26): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(143,26): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(143,26): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(143,26): warning C4244:         ]
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,79): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,79): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,79): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,79): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,79): warning C4244:         ]
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,54): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,54): warning C4244:         with
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,54): warning C4244:         [
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,54): warning C4244:             T=float
+C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Window.cpp(247,54): warning C4244:         ]
+  test tilemap editor.vcxproj -> C:\Users\D3032328\Downloads\Tilemap editor no cmake\x64\Debug\test tilemap editor.exe

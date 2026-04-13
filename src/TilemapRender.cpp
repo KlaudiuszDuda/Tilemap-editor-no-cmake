@@ -121,7 +121,7 @@ void TilemapRender::updateCanvasEdit()
 
 	if (!(result == GL_ALREADY_SIGNALED || result == GL_CONDITION_SATISFIED) && transferingTilemapChunkPointer.size() == 0) return;
 
-	if (input.getMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	if (input.getMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_REPEAT)
 	{
 		glm::ivec3 mouseWorldPosition = window.getWorldMousePosition(camera);
 		u32 mouseWorldPositionX = mouseWorldPosition.x;
@@ -157,7 +157,22 @@ void TilemapRender::updateCanvasEdit()
 
 			transferingTilemapChunkPointer.emplace_back(tileChunk(tilemapChunkPointer[mouseWorldChunkIndex], offset, mouseWorldChunkIndex));
 		}
-		
+	}
+	if (input.getMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
+	{
+		glm::ivec3 mouseWorldPosition = window.getWorldMousePosition(camera);
+		u32 mouseWorldPositionX = mouseWorldPosition.x;
+		u32 mouseWorldPositionY = mouseWorldPosition.y;
+
+		u32 mouseWorldChunkPositionX = mouseWorldPositionX / CHUNK_SIZE;
+		u32 mouseWorldChunkPositionY = mouseWorldPositionY / CHUNK_SIZE;
+
+		u32 mouseWorldChunkPositionIndexX = mouseWorldPositionX % CHUNK_SIZE;
+		u32 mouseWorldChunkPositionIndexY = mouseWorldPositionY % CHUNK_SIZE;
+
+		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSizeX;
+		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
+
 		if (tileActionType == 1)
 		{
 			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
