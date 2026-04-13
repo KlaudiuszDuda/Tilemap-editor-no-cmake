@@ -94,7 +94,7 @@ void Callback::updateKeyboardCallback(GLFWwindow* window, i32 key, i32 scancode,
 void Callback::updateMouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods)
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
-    ev->m_InputData.digital[button + GLFW_KEY_LAST + 1] = static_cast<f32>(action);
+    ev->m_InputData.digital[button + GLFW_KEY_LAST + 1] = action;
 }
 
 void Callback::updateScrollWheelCallback(GLFWwindow* window, f64 xoffset, f64 yoffset)

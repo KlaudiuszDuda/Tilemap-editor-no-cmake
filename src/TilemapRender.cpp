@@ -121,7 +121,7 @@ void TilemapRender::updateCanvasEdit()
 
 	if (!(result == GL_ALREADY_SIGNALED || result == GL_CONDITION_SATISFIED) && transferingTilemapChunkPointer.size() == 0) return;
 
-	if (input.getMouseButton(GLFW_MOUSE_BUTTON_LEFT))
+	if (input.getMouseButton(GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS)
 	{
 		glm::ivec3 mouseWorldPosition = window.getWorldMousePosition(camera);
 		u32 mouseWorldPositionX = mouseWorldPosition.x;
@@ -136,35 +136,67 @@ void TilemapRender::updateCanvasEdit()
 		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSizeX;
 		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
 
-		if (mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)
+		if (tileActionType == 0)
 		{
+			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
 			if (lastTileIndex == mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
-			if (tileActionType == 0)
-			{
-				tilemapBuffer[lastTileIndex] = textureSelected;
-			}
-			if (tileActionType == 1)
-			{
-				u32 rotation = ((((tilemapBuffer[lastTileIndex] >> 8) & 3u) + 1) % 4);
-				u32 bits = (rotation << 8);
-				u32 mask = bits;
-				mask |= 255;
-				mask |= (1u << 21u) << 10u;
-				tilemapBuffer[lastTileIndex] &= mask;
-				tilemapBuffer[lastTileIndex] |= bits;
-			}
-			if (tileActionType == 2)
-			{
-				u32 flip = ((((tilemapBuffer[lastTileIndex] >> 10) & 1u) + 1) % 2);
-				u32 bits = (flip << 10);
-				u32 mask = bits;
-				mask |= 1023;
-				mask |= (1u << 19u) << 8u;
-				tilemapBuffer[lastTileIndex] &= mask;
-				tilemapBuffer[lastTileIndex] |= bits;
-			}
+			tilemapBuffer[lastTileIndex] = textureSelected;
+
+			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(u32));
+
+			auto& buffer = textureTileData.getBuffer();
+
+			u32 flags = GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT;
+			void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, offset, CHUNK_SIZE_SQUARED * sizeof(u32), flags);
+
+			memcpy(dst, tilemapBuffer.data() + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED, CHUNK_SIZE_SQUARED * sizeof(u32));
+
+			buffer.UnmapBuffer(GL_ARRAY_BUFFER);
+
+			transferingTilemapChunkPointer.emplace_back(tileChunk(tilemapChunkPointer[mouseWorldChunkIndex], offset, mouseWorldChunkIndex));
+		}
+		
+		if (tileActionType == 1)
+		{
+			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
+
+			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
+			u32 rotation = ((((tilemapBuffer[lastTileIndex] >> 8) & 3u) + 1) % 4);
+			u32 bits = (rotation << 8);
+			u32 mask = bits;
+			mask |= 255;
+			mask |= (1u << 21u) << 10u;
+			tilemapBuffer[lastTileIndex] &= mask;
+			tilemapBuffer[lastTileIndex] |= bits;
+
+			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(u32));
+
+			auto& buffer = textureTileData.getBuffer();
+
+			u32 flags = GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT;
+			void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, offset, CHUNK_SIZE_SQUARED * sizeof(u32), flags);
+
+			memcpy(dst, tilemapBuffer.data() + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED, CHUNK_SIZE_SQUARED * sizeof(u32));
+
+			buffer.UnmapBuffer(GL_ARRAY_BUFFER);
+
+			transferingTilemapChunkPointer.emplace_back(tileChunk(tilemapChunkPointer[mouseWorldChunkIndex], offset, mouseWorldChunkIndex));
+		}
+		if (tileActionType == 2)
+		{
+			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
+
+			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
+
+			u32 flip = ((((tilemapBuffer[lastTileIndex] >> 10) & 1u) + 1) % 2);
+			u32 bits = (flip << 10);
+			u32 mask = bits;
+			mask |= 1023;
+			mask |= (1u << 19u) << 8u;
+			tilemapBuffer[lastTileIndex] &= mask;
+			tilemapBuffer[lastTileIndex] |= bits;
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(u32));
 
