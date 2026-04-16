@@ -35,15 +35,14 @@ struct Callback
 	static void updateKeyboardCallback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods);
 	static void updateMouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods);
 	static void updateScrollWheelCallback(GLFWwindow* window, f64 xoffset, f64 yoffset);
-	static void updateJoystickCallback(i32 joystickId, i32 event);
 
 	static void windowResizeEvent(GLFWwindow* window, i32 xposIn, i32 yposIn);
 	static void windowMousePositionEvent(GLFWwindow* window, f64 xposIn, f64 yposIn);
 
 	union InputData
 	{
-		f32 analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1) * 3];
-		i32 digital[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1) * 3];
+		f32 analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1];
+		i32 digital[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1];
 	};
 	InputData m_InputData{};
 	glm::vec2 m_WindowMousePosition;
@@ -58,17 +57,15 @@ class Input
 public:
 	Input();
 
+	void pollInputs();
+
 	i32 getKeyboard(u32 index);
 	i32 getMouseButton(u32 index);
 	f32 getScrollWheel();
-	i32 getGamepadButton(u32 index, u32 joystickId);
-	f32 getGamepadAxis(u32 index, u32 joystickId);
 
 	void MapKeyToAction(MappedInput mapping, u32 index);
 	void MapMouseButtonToAction(MappedInput mapping, u32 index);
 	void MapScrollWheelToAction(MappedInput mapping);
-	void MapGamepadButtonToAction(MappedInput mapping, u32 index, u32 joystickId);
-	void MapGamepadAxisToAction(MappedInput mapping, u32 index, u32 joystickId);
 
 	void UnmapInputFromAction(MappedInput mapping);
 

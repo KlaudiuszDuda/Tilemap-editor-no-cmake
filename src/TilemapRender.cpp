@@ -92,24 +92,32 @@ void TilemapRender::updateCamera()
 		camera.Position.z += Time.dt * 5;
 	}
 
-	if (input.isActionActive(MappedInput::Z))
+	if (input.isActionActiveDigital(MappedInput::Z, GLFW_PRESS))
 	{
 		textureSelected--;
+		if (textureSelected < 0)
+		{
+			textureSelected = height * width;
+		}
 	}
-	if (input.isActionActive(MappedInput::X))
+	if (input.isActionActiveDigital(MappedInput::X, GLFW_PRESS))
 	{
 		textureSelected++;
+		if (textureSelected > height * width)
+		{
+			textureSelected = 0;
+		}
 	}
 
-	if (input.isActionActive(MappedInput::T))
+	if (input.isActionActiveDigital(MappedInput::T, GLFW_PRESS))
 	{
 		tileActionType = 0;
 	}
-	if (input.isActionActive(MappedInput::R))
+	if (input.isActionActiveDigital(MappedInput::R, GLFW_PRESS))
 	{
 		tileActionType = 1;
 	}
-	if (input.isActionActive(MappedInput::F))
+	if (input.isActionActiveDigital(MappedInput::F, GLFW_PRESS))
 	{
 		tileActionType = 2;
 	}
@@ -138,8 +146,11 @@ void TilemapRender::updateCanvasEdit()
 
 		if (tileActionType == 0)
 		{
-			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
-			if (lastTileIndex == mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX < 0) return;
+			if (mouseWorldChunkPositionY < 0) return;
+			if (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED] == textureSelected) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 			tilemapBuffer[lastTileIndex] = textureSelected;
@@ -175,7 +186,10 @@ void TilemapRender::updateCanvasEdit()
 
 		if (tileActionType == 1)
 		{
-			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX < 0) return;
+			if (mouseWorldChunkPositionY < 0) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 			u32 rotation = ((((tilemapBuffer[lastTileIndex] >> 8) & 3u) + 1) % 4);
@@ -201,7 +215,10 @@ void TilemapRender::updateCanvasEdit()
 		}
 		if (tileActionType == 2)
 		{
-			if (!(mouseWorldChunkIndex < tilemapChunkSizeX * tilemapChunkSizeY)) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX < 0) return;
+			if (mouseWorldChunkPositionY < 0) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 
@@ -252,6 +269,7 @@ void TilemapRender::draw()
 		}
 		transferingTilemapChunkPointer.clear();
 	}
+	glDisable(GL_CULL_FACE);
 	shader.SetMatrix4("viewAndProjection", camera.getViewAndProjection());
 
 	const Frustum camFrustum = createFrustumFromCamera(camera, window.getWindowSize().x / window.getWindowSize().y, glm::radians(camera.Fov), 0.1f, 100000.0f);
@@ -268,4 +286,5 @@ void TilemapRender::draw()
 			textureVertexArray.DrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, CHUNK_SIZE_SQUARED);
 		}
 	}
+	glEnable(GL_CULL_FACE);
 }

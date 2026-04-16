@@ -44,7 +44,7 @@ private:
 	std::vector<tileChunk> transferingTilemapChunkPointer;
 	std::unordered_map<u32, u32> tileChunkIndex;
 
-	u32 textureSelected = 0;
+	i32 textureSelected = 1;
 	u32 tileActionType = 0;;
 
 	Syncing fence;

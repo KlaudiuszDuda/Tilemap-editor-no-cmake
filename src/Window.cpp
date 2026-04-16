@@ -85,6 +85,18 @@ Input::Input()
     MapKeyToAction(MappedInput::SPACE, GLFW_KEY_SPACE);
 }
 
+void Input::pollInputs()
+{
+    for (i32 i = 0; i < GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1; i++)
+    {
+        i32 input = callback.m_InputData.digital[i];
+        if (input == GLFW_PRESS)
+        {
+            callback.m_InputData.digital[i] = GLFW_REPEAT;
+        }
+    }
+}
+
 void Callback::updateKeyboardCallback(GLFWwindow* window, i32 key, i32 scancode, i32 action, i32 mods)
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
@@ -94,45 +106,13 @@ void Callback::updateKeyboardCallback(GLFWwindow* window, i32 key, i32 scancode,
 void Callback::updateMouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods)
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
-    ev->m_InputData.digital[button + GLFW_KEY_LAST + 1] = action - 1;
+    ev->m_InputData.digital[button + GLFW_KEY_LAST + 1] = action;
 }
 
 void Callback::updateScrollWheelCallback(GLFWwindow* window, f64 xoffset, f64 yoffset)
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
     ev->m_InputData.analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1] = yoffset;
-}
-
-void Callback::updateJoystickCallback(i32 joystickId, i32 event)
-{
-    Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window.getWindowPointer()));
-	if (glfwJoystickIsGamepad(joystickId))
-	{
-		if (event == GLFW_CONNECTED)
-		{
-			ev->m_GamepadsConnected++;
-		}
-		else if (event == GLFW_DISCONNECTED)
-		{
-			ev->m_GamepadsConnected--;
-		}
-	}
-
-	for (u32 GamepadIndex = 0; GamepadIndex < ev->m_GamepadsConnected; ++GamepadIndex)
-	{
-		GLFWgamepadstate state;
-		if (glfwGetGamepadState(joystickId, &state))
-		{
-			for (u32 i = 0; i <= GLFW_GAMEPAD_BUTTON_LAST; ++i)
-			{
-				ev->m_InputData.digital[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + i + GamepadIndex * (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1)] = static_cast<f32>(state.buttons[i]);
-			}
-			for (u32 i = 0; i <= GLFW_GAMEPAD_AXIS_LAST; ++i)
-			{
-				ev->m_InputData.analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + i + GLFW_GAMEPAD_BUTTON_LAST + 1 + GamepadIndex * (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1)] = state.axes[i];
-			}
-		}
-	}
 }
 
 void Callback::windowResizeEvent(GLFWwindow* window, i32 xposIn, i32 yposIn)
@@ -157,29 +137,13 @@ i32 Input::getKeyboard(u32 index)
 
 i32 Input::getMouseButton(u32 index)
 {
-    Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window.p_Window));
     i32 input = callback.m_InputData.digital[GLFW_KEY_LAST + 1 + index];
-    if (ev->m_InputData.digital[index + GLFW_KEY_LAST + 1] != GLFW_REPEAT && ev->m_InputData.digital[index + GLFW_KEY_LAST + 1] != (GLFW_RELEASE - 1))
-    {
-        ev->m_InputData.digital[index + GLFW_KEY_LAST + 1]++;
-    }
-
     return input;
 }
 
 f32 Input::getScrollWheel()
 {
     return callback.m_InputData.analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1];
-}
-
-i32 Input::getGamepadButton(u32 index, u32 joystickId)
-{
-    return callback.m_InputData.digital[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + index + joystickId * (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1)];
-}
-
-f32 Input::getGamepadAxis(u32 index, u32 joystickId)
-{
-    return callback.m_InputData.analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + GLFW_GAMEPAD_BUTTON_LAST + index + joystickId * (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1)];
 }
 
 void Input::MapKeyToAction(MappedInput mapping, u32 index)
@@ -194,14 +158,6 @@ void Input::MapScrollWheelToAction(MappedInput mapping)
 {
     m_ActionMapping[static_cast<u32>(mapping)] = GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1;
 }
-void Input::MapGamepadButtonToAction(MappedInput mapping, u32 index, u32 joystickId)
-{
-    m_ActionMapping[static_cast<u32>(mapping)] = GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + index + joystickId * (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1);
-}
-void Input::MapGamepadAxisToAction(MappedInput mapping, u32 index, u32 joystickId)
-{
-    m_ActionMapping[static_cast<u32>(mapping)] = GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1 + 1 + GLFW_GAMEPAD_BUTTON_LAST + index + joystickId * (GLFW_GAMEPAD_BUTTON_LAST + 1 + GLFW_GAMEPAD_AXIS_LAST + 1);
-}
 
 void Input::UnmapInputFromAction(MappedInput mapping)
 {
@@ -210,7 +166,7 @@ void Input::UnmapInputFromAction(MappedInput mapping)
 
 bool Input::isActionActive(MappedInput mappedInput)
 {
-    if (callback.m_InputData.analog[m_ActionMapping[static_cast<u32>(mappedInput)]] != 0)
+    if (callback.m_InputData.digital[m_ActionMapping[static_cast<u32>(mappedInput)]] != 0)
     {
         return true;
     }
@@ -258,7 +214,6 @@ Window::Window()
             callback.m_GamepadsConnected++;
         }
     }
-    glfwSetJoystickCallback(Callback::updateJoystickCallback);
     glfwSetKeyCallback(p_Window, Callback::updateKeyboardCallback);
     glfwSetMouseButtonCallback(p_Window, Callback::updateMouseButtonCallback);
     glfwSetScrollCallback(p_Window, Callback::updateScrollWheelCallback);
@@ -321,11 +276,6 @@ glm::vec3 Window::getWorldMousePosition(Viewport& viewport)
     glm::vec3 worldPos = rayOrigin + t * rayDir;
 
     return worldPos;
-
-    std::cout << "World pos = "
-        << worldPos.x << ", "
-        << worldPos.y << ", "
-        << worldPos.z << std::endl;
 }
 
 void Window::SwapBuffer()
@@ -335,6 +285,7 @@ void Window::SwapBuffer()
 
 void Window::PollEvents()
 {
+    input.pollInputs();
     glfwPollEvents();
     Time.update();
     if (input.isActionActive(MappedInput::ESC))

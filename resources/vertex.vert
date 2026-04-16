@@ -14,8 +14,8 @@ uniform ivec2 tilemapChunkSize;
 ivec2 baseUVs[4] = ivec2[](
     ivec2(0, 0), // bottom-left
     ivec2(1, 0), // bottom-right
-    ivec2(0, 1), // top-right
-    ivec2(1, 1)  // top-left
+    ivec2(0, 1), // top-left
+    ivec2(1, 1)  // top-right
 );
 
 // Rotation lookup (no branches, fast)
@@ -41,11 +41,6 @@ void main()
 
     ivec2 uv = baseUVs[rotatedIndex];
 
-    if (flip == 1)
-    {
-        uv.x = 1 - uv.x;
-    }
-
     float u = float(tileX + uv.x) / float(atlasTileSize.x);
     float v = float(tileY + uv.y) / float(atlasTileSize.y);
 
@@ -53,6 +48,11 @@ void main()
     
     int vx = gl_VertexID % 2;
     int vy = (gl_VertexID / 2) % 2;
+
+    if (flip == 1)
+    {
+        vx = 1 - vx;
+    }
 
     float x = float(gl_InstanceID % 8) + baseInstanceX * 8;
     float y = float(gl_InstanceID / 8) + baseInstanceY * 8;
