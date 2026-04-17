@@ -39,12 +39,12 @@ public:
 
 private:
 	kl::ChunkBufferAllocator textureTileData;
-	std::vector<u32> tilemapBuffer;
+	std::vector<glm::uvec2> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
 	std::vector<tileChunk> transferingTilemapChunkPointer;
 	std::unordered_map<u32, u32> tileChunkIndex;
 
-	i32 textureSelected = 1;
+	glm::uvec2 actionSelect = glm::uvec2(1, 0x808080FF);
 	u32 tileActionType = 0;;
 
 	Syncing fence;

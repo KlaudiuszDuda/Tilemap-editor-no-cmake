@@ -1,10 +1,11 @@
 #version 430 core
 
-layout (location = 0) in uint textureData;
+layout (location = 0) in uvec2 textureData;
 layout (location = 1) in uint baseInstanceX;
 layout (location = 2) in uint baseInstanceY;
 
 out vec2 TexCoord;
+out vec4 RGBA;
 
 uniform mat4 viewAndProjection;
 uniform ivec2 atlasTileSize;
@@ -28,14 +29,11 @@ const int rotLUT[4][4] = int[4][4](
 
 void main()
 {
-    uint tileX = (textureData & 255) % atlasTileSize.x;
-    uint tileY = (textureData & 255) / atlasTileSize.x;
+    uint tileX = (textureData.x & 255) % atlasTileSize.x;
+    uint tileY = (textureData.x & 255) / atlasTileSize.x;
 
-    //int ux = gl_VertexID % 2;
-    //int uy = (gl_VertexID / 2) % 2;
-
-    int rotation = int((textureData >> 8) & 3u);
-    int flip = int((textureData >> 10) & 1u);
+    int rotation = int((textureData.x >> 8) & 3u);
+    int flip = int((textureData.x >> 10) & 1u);
 
     int rotatedIndex = rotLUT[rotation][gl_VertexID];
 
@@ -45,6 +43,12 @@ void main()
     float v = float(tileY + uv.y) / float(atlasTileSize.y);
 
     TexCoord = vec2(u, v);
+    float R = 1.0f - float(textureData.y & 255u) / 255.f;
+    float G = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
+    float B = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
+    float A = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
+    
+    RGBA = vec4(R, G, B, A);
     
     int vx = gl_VertexID % 2;
     int vy = (gl_VertexID / 2) % 2;

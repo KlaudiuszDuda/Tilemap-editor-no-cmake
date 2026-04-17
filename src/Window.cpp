@@ -79,6 +79,7 @@ Input::Input()
     MapKeyToAction(MappedInput::R, GLFW_KEY_R);
     MapKeyToAction(MappedInput::T, GLFW_KEY_T);
     MapKeyToAction(MappedInput::F, GLFW_KEY_F);
+    MapKeyToAction(MappedInput::C, GLFW_KEY_C);
     MapKeyToAction(MappedInput::CAPS_LOCK, GLFW_KEY_CAPS_LOCK);
     MapKeyToAction(MappedInput::ESC, GLFW_KEY_ESCAPE);
     MapKeyToAction(MappedInput::LSHIFT, GLFW_KEY_LEFT_SHIFT);
@@ -228,6 +229,10 @@ Window::Window()
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glCullFace(GL_BACK);
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 }
