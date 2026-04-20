@@ -25,6 +25,20 @@ struct tileChunk {
 	}
 };
 
+struct TextureData
+{
+	u32 textureData;
+	u32 brightness;
+};
+
+struct Color
+{
+	u32 R;
+	u32 G;
+	u32 B;
+	u32 A;
+};
+
 class TilemapRender
 {
 public:
@@ -40,11 +54,13 @@ public:
 private:
 	kl::ChunkBufferAllocator textureTileData;
 	std::vector<glm::uvec2> tilemapBuffer;
+	//std::vector<Color> tileVerticeDataBuffer;
 	std::vector<u32> tilemapChunkPointer;
 	std::vector<tileChunk> transferingTilemapChunkPointer;
-	std::unordered_map<u32, u32> tileChunkIndex;
+	//std::unordered_map<u32, u32> tileChunkIndex;
 
-	glm::uvec2 actionSelect = glm::uvec2(1, 0x808080FF);
+	u32 textureSelect = 1;
+	u32 colorSelected = 0x808080FF;
 	u32 tileActionType = 0;;
 
 	Syncing fence;

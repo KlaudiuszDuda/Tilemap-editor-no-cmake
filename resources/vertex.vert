@@ -6,6 +6,7 @@ layout (location = 2) in uint baseInstanceY;
 
 out vec2 TexCoord;
 out vec4 RGBA;
+out float brightness;
 
 uniform mat4 viewAndProjection;
 uniform ivec2 atlasTileSize;
@@ -49,6 +50,7 @@ void main()
     float A = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
     
     RGBA = vec4(R, G, B, A);
+    brightness = 0;
     
     int vx = gl_VertexID % 2;
     int vy = (gl_VertexID / 2) % 2;

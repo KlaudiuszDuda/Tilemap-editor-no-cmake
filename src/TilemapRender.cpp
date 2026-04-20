@@ -98,18 +98,18 @@ void TilemapRender::updateCamera()
 
 	if (input.isActionActiveDigital(MappedInput::Z, GLFW_PRESS))
 	{
-		actionSelect.x--;
-		if (actionSelect.x < 0)
+		textureSelect--;
+		if (textureSelect < 0)
 		{
-			actionSelect.x = height * width;
+			textureSelect = height * width;
 		}
 	}
 	if (input.isActionActiveDigital(MappedInput::X, GLFW_PRESS))
 	{
-		actionSelect.x++;
-		if (actionSelect.x > height * width)
+		textureSelect++;
+		if (textureSelect > height * width)
 		{
-			actionSelect.x = 0;
+			textureSelect = 0;
 		}
 	}
 
@@ -158,10 +158,10 @@ void TilemapRender::updateCanvasEdit()
 			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
-			if (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].x == actionSelect.x) return;
+			if (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].x == textureSelect) return;
 
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
-			tilemapBuffer[lastTileIndex].x = actionSelect.x;
+			tilemapBuffer[lastTileIndex].x = textureSelect;
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(glm::uvec2));
 
@@ -182,10 +182,10 @@ void TilemapRender::updateCanvasEdit()
 			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
-			if (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].y == actionSelect.y) return;
+			if (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].y == colorSelected) return;
 		
 			lastTileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
-			tilemapBuffer[lastTileIndex].y = actionSelect.y;
+			tilemapBuffer[lastTileIndex].y = colorSelected;
 		
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(glm::uvec2));
 		
