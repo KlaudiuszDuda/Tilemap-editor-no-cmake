@@ -2,12 +2,26 @@
 
 out vec4 FragColor;
 in vec2 TexCoord;
-in vec4 RGBA;
+//in vec3 RGB;
 in float brightness;
+
+in vec3 corner0; // bottom-left
+in vec3 corner1; // bottom-right
+in vec3 corner2; // top-right
+in vec3 corner3; // top-left
+
+in vec2 vQuadUV;
 
 uniform sampler2D TextureAtlasID;
 
 void main()
 {
-    FragColor = texture(TextureAtlasID, TexCoord) * RGBA + vec4(brightness, brightness, brightness, 0.0f);
+    vec3 color =
+        mix(
+            mix(corner0, corner1, vQuadUV.x),
+            mix(corner2, corner3, vQuadUV.x),
+            vQuadUV.y
+        );
+
+    FragColor = texture(TextureAtlasID, TexCoord) * vec4(color, 1.f) + vec4(brightness, brightness, brightness, 0.0f);
 }

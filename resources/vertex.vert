@@ -1,12 +1,19 @@
 #version 430 core
 
-layout (location = 0) in uvec2 textureData;
+layout (location = 0) in uvec4 textureData;
 layout (location = 1) in uint baseInstanceX;
 layout (location = 2) in uint baseInstanceY;
 
 out vec2 TexCoord;
-out vec4 RGBA;
+//out vec3 RGB;
 out float brightness;
+
+out vec3 corner0; // bottom-left
+out vec3 corner1; // bottom-right
+out vec3 corner2; // top-right
+out vec3 corner3; // top-left
+
+out vec2 vQuadUV;
 
 uniform mat4 viewAndProjection;
 uniform ivec2 atlasTileSize;
@@ -30,6 +37,7 @@ const int rotLUT[4][4] = int[4][4](
 
 void main()
 {
+    uint quadVertexID = gl_VertexID & 3;
     uint tileX = (textureData.x & 255) % atlasTileSize.x;
     uint tileY = (textureData.x & 255) / atlasTileSize.x;
 
@@ -40,16 +48,32 @@ void main()
 
     ivec2 uv = baseUVs[rotatedIndex];
 
+    vQuadUV = vec2(uv);
+
     float u = float(tileX + uv.x) / float(atlasTileSize.x);
     float v = float(tileY + uv.y) / float(atlasTileSize.y);
 
     TexCoord = vec2(u, v);
-    float R = 1.0f - float(textureData.y & 255u) / 255.f;
-    float G = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
-    float B = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
-    float A = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
+    float R0 = 1.0f - float(textureData.y & 255u) / 255.f;
+    float G0 = 1.0f - float(textureData.y & 255u) / 255.f;
+    float B0 = 1.0f - float(textureData.y & 255u) / 255.f;
+
+    float R1 = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
+    float G1 = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
+    float B1 = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
+
+    float R2 = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
+    float G2 = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
+    float B2 = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
+
+    float R3 = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
+    float G3 = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
+    float B3 = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
     
-    RGBA = vec4(R, G, B, A);
+    corner0 = vec3(R0, G0, B0);
+    corner1 = vec3(R1, G1, B1);
+    corner2 = vec3(R2, G2, B2);
+    corner3 = vec3(R3, G3, B3);
     brightness = 0;
     
     int vx = gl_VertexID % 2;

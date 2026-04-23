@@ -28,15 +28,9 @@ struct tileChunk {
 struct TextureData
 {
 	u32 textureData;
-	u32 brightness;
-};
-
-struct Color
-{
 	u32 R;
 	u32 G;
 	u32 B;
-	u32 A;
 };
 
 class TilemapRender
@@ -53,15 +47,13 @@ public:
 
 private:
 	kl::ChunkBufferAllocator textureTileData;
-	std::vector<glm::uvec2> tilemapBuffer;
-	//std::vector<Color> tileVerticeDataBuffer;
+	std::vector<TextureData> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
 	std::vector<tileChunk> transferingTilemapChunkPointer;
-	//std::unordered_map<u32, u32> tileChunkIndex;
 
 	u32 textureSelect = 1;
-	u32 colorSelected = 0x808080FF;
-	u32 tileActionType = 0;;
+	glm::uvec3 colorSelected = glm::uvec3(0x80, 0x80, 0x80);
+	u32 tileActionType = 0;
 
 	Syncing fence;
 	VertexArray<1> textureVertexArray;
@@ -72,8 +64,6 @@ private:
 
 	i32 tilemapChunkSizeX;
 	i32 tilemapChunkSizeY;
-
-	u32 lastTileIndex = 0u-1;
 
 	Viewport camera;
 };
