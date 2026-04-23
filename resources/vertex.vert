@@ -55,20 +55,20 @@ void main()
 
     TexCoord = vec2(u, v);
     float R0 = 1.0f - float(textureData.y & 255u) / 255.f;
-    float G0 = 1.0f - float(textureData.y & 255u) / 255.f;
-    float B0 = 1.0f - float(textureData.y & 255u) / 255.f;
+    float G0 = 1.0f - float(textureData.z & 255u) / 255.f;
+    float B0 = 1.0f - float(textureData.w & 255u) / 255.f;
 
     float R1 = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
-    float G1 = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
-    float B1 = 1.0f - float((textureData.y >> 8) & 255u) / 255.f;
+    float G1 = 1.0f - float((textureData.z >> 8) & 255u) / 255.f;
+    float B1 = 1.0f - float((textureData.w >> 8) & 255u) / 255.f;
 
     float R2 = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
-    float G2 = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
-    float B2 = 1.0f - float((textureData.y >> 16) & 255u) / 255.f;
+    float G2 = 1.0f - float((textureData.z >> 16) & 255u) / 255.f;
+    float B2 = 1.0f - float((textureData.w >> 16) & 255u) / 255.f;
 
     float R3 = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
-    float G3 = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
-    float B3 = 1.0f - float((textureData.y >> 24) & 255u) / 255.f;
+    float G3 = 1.0f - float((textureData.z >> 24) & 255u) / 255.f;
+    float B3 = 1.0f - float((textureData.w >> 24) & 255u) / 255.f;
     
     corner0 = vec3(R0, G0, B0);
     corner1 = vec3(R1, G1, B1);
