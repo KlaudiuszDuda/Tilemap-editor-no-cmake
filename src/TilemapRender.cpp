@@ -129,6 +129,18 @@ void TilemapRender::updateCamera()
 	{
 		tileActionType = 3;
 	}
+	if (input.getKeyboard(GLFW_KEY_0))
+	{
+		colorSelected = glm::uvec3(0, 0, 0);
+	}
+	if (input.getKeyboard(GLFW_KEY_1))
+	{
+		colorSelected = glm::uvec3(0x80, 0x80, 0x80);
+	}
+	if (input.getKeyboard(GLFW_KEY_2))
+	{
+		colorSelected = glm::uvec3(0xFF, 0xFF, 0xFF);
+	}
 }
 
 void TilemapRender::updateCanvasEdit()

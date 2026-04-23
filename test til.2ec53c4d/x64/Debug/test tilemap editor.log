@@ -42,19 +42,19 @@ C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(96,32)
 C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(96,32): warning C4244:             T=float
 C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(96,32): warning C4244:         ]
 C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(110,21): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(162,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(163,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(186,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(187,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(246,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(247,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(275,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(276,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(342,88): warning C4312: 'type cast': conversion from '_Ty' to 'void *' of greater size
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(342,88): warning C4312:         with
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(342,88): warning C4312:         [
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(342,88): warning C4312:             _Ty=u32
-C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(342,88): warning C4312:         ]
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(174,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(175,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(198,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(199,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(258,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(259,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(287,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(288,33): warning C4018: '>': signed/unsigned mismatch
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(354,88): warning C4312: 'type cast': conversion from '_Ty' to 'void *' of greater size
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(354,88): warning C4312:         with
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(354,88): warning C4312:         [
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(354,88): warning C4312:             _Ty=u32
+C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\TilemapRender.cpp(354,88): warning C4312:         ]
   main.cpp
 C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
 C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline

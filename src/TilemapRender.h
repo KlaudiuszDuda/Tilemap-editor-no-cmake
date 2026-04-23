@@ -52,7 +52,7 @@ private:
 	std::vector<tileChunk> transferingTilemapChunkPointer;
 
 	u32 textureSelect = 1;
-	glm::uvec3 colorSelected = glm::uvec3(0x80, 0x80, 0x80);
+	glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);
 	u32 tileActionType = 0;
 
 	Syncing fence;
