@@ -28,8 +28,7 @@ struct tileChunk {
 
 struct GPUupload
 {
-	u32 size;
-	u32 offset;
+	u64 offset;
 	Syncing fence;
 };
 
@@ -57,7 +56,6 @@ private:
 	kl::ChunkBufferAllocator textureTileData;
 	std::vector<TextureData> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
-	std::vector<tileChunk> transferingTilemapChunkPointer;
 
 	std::vector<GPUupload> GPUUploadQueue;
 
@@ -65,7 +63,6 @@ private:
 	glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);
 	u32 tileActionType = 0;
 
-	Syncing fence;
 	VertexArray<1> textureVertexArray;
 	Shader shader;
 

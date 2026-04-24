@@ -11,9 +11,10 @@ public:
 	{
 		return glClientWaitSync(fence, flags, timeout);
 	}
-	~Syncing()
+	inline void DeleteSync()
 	{
 		glDeleteSync(fence);
+		fence = 0;
 	}
 	void FenceSync(GLenum condition, GLbitfield flags)
 	{
@@ -30,5 +31,9 @@ public:
 	void WaitSync(GLbitfield flags, GLuint64 timeout)
 	{
 		glWaitSync(fence, flags, timeout);
+	}
+	GLboolean IsNotSynced()
+	{
+		return fence == 0;
 	}
 };
