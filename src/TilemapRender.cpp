@@ -4,32 +4,73 @@
 
 TilemapRender::TilemapRender()
 {
-	tilemapChunkSizeX = 4;
-	tilemapChunkSizeY = 4;
+	std::ifstream tilemapData;
 
-	tilemapBuffer.resize(tilemapChunkSizeX * tilemapChunkSizeY * CHUNK_SIZE_SQUARED);
-	tilemapChunkPointer.resize(tilemapChunkSizeX * tilemapChunkSizeY);
-	transferingTilemapChunkPointer.resize(tilemapChunkSizeX * tilemapChunkSizeY);
+	tilemapData.open("resources/tilemap.tmk", std::ios::binary | std::ios::in | std::ios::ate);
+
+	std::streamsize size = tilemapData.tellg();
+
+	if (size == -1)
+	{
+		tilemapData.close();
+		std::ofstream newFile("resources/tilemap.tmk", std::ios::binary);
+		tilemapData.open("resources/tilemap.tmk", std::ios::binary | std::ios::in);
+		size = tilemapData.tellg();
+	}
+
+	if (size == 0)
+	{
+		tilemapChunkSize.x = 4;
+		tilemapChunkSize.y = 4;
+
+		tilemapBuffer.resize(tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED);
+	}
+	else
+	{
+		tilemapData.seekg(0, std::ios::beg);
+		tilemapData.read(reinterpret_cast<char*>(&tilemapChunkSize), sizeof(glm::ivec2));
+		tilemapBuffer.resize(tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED);
+		tilemapData.seekg(sizeof(glm::ivec2), std::ios::beg);
+		tilemapData.read(reinterpret_cast<char*>(tilemapBuffer.data()), tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED * sizeof(TextureData));
+	}
+	tilemapData.close();
+
+	tilemapChunkPointer.resize(tilemapChunkSize.x * tilemapChunkSize.y);
+	transferingTilemapChunkPointer.resize(tilemapChunkSize.x * tilemapChunkSize.y);
 
 	textureVertexArray.bind(0);
-	textureTileData.init((tilemapChunkSizeX * tilemapChunkSizeY + 1) * CHUNK_SIZE_SQUARED * sizeof(TextureData));
+	textureTileData.init((tilemapChunkSize.x * tilemapChunkSize.y + 1) * CHUNK_SIZE_SQUARED * sizeof(TextureData));
 
 	auto& buffer = textureTileData.getBuffer();
 	u32 flags = GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT | GL_MAP_UNSYNCHRONIZED_BIT;
 	void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, 0, 1, flags);
 
-	for (u32 i = 0; i < tilemapChunkSizeX * tilemapChunkSizeY; i++)
+	if (size == 0)
 	{
-		transferingTilemapChunkPointer[i].oldOffset = 0u - 1;
-		transferingTilemapChunkPointer[i].newOffset = textureTileData.alloc_init(dst, CHUNK_SIZE_SQUARED * sizeof(TextureData));
-		transferingTilemapChunkPointer[i].chunkIndex = i;
+		for (u32 i = 0; i < tilemapChunkSize.x * tilemapChunkSize.y; i++)
+		{
+			transferingTilemapChunkPointer[i].oldOffset = 0u - 1;
+			transferingTilemapChunkPointer[i].newOffset = textureTileData.alloc_init(dst, CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			transferingTilemapChunkPointer[i].chunkIndex = i;
+		}
 	}
+	else
+	{
+		for (u32 i = 0; i < tilemapChunkSize.x * tilemapChunkSize.y; i++)
+		{
+			transferingTilemapChunkPointer[i].oldOffset = 0u - 1;
+			transferingTilemapChunkPointer[i].newOffset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			transferingTilemapChunkPointer[i].chunkIndex = i;
+			memcpy((u8*)dst + transferingTilemapChunkPointer[i].newOffset, tilemapBuffer.data() + transferingTilemapChunkPointer[i].newOffset / sizeof(TextureData), CHUNK_SIZE_SQUARED * sizeof(TextureData));
+		}
+	}
+
 	buffer.UnmapBuffer(GL_ARRAY_BUFFER);
 
 	fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 
 	textureVertexArray.EnableVertexAttribArray(0);
-	textureVertexArray.VertexAttribIPointer(0, 2, GL_UNSIGNED_INT, sizeof(glm::uvec2), (void*)0);
+	textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(glm::uvec4), (void*)0);
 	textureVertexArray.VertexAttribDivisor(0, 1);
 
 	glActiveTexture(GL_TEXTURE0);
@@ -56,13 +97,19 @@ TilemapRender::TilemapRender()
 	height /= 16;
 
 	shader.SetVector2i("atlasTileSize", width, height);
-	shader.SetVector2i("tilemapChunkSize", tilemapChunkSizeX, tilemapChunkSizeY);
+	shader.SetVector2i("tilemapChunkSize", tilemapChunkSize);
 	shader.SetInt("TextureAtlasID", 0);
 }
 
 TilemapRender::~TilemapRender()
 {
+	std::ofstream tilemapData;
 
+	tilemapData.open("resources/tilemap.tmk", std::ios::binary | std::ios::out);
+	tilemapData.write(reinterpret_cast<char*>(&tilemapChunkSize), sizeof(glm::ivec2));
+	tilemapData.seekp(sizeof(glm::ivec2), std::ios::beg);
+	tilemapData.write(reinterpret_cast<char*>(tilemapBuffer.data()), tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED * sizeof(TextureData));
+	tilemapData.close();
 }
 
 void TilemapRender::updateCamera()
@@ -162,7 +209,7 @@ void TilemapRender::updateCanvasEdit()
 		u32 mouseWorldChunkPositionIndexX = mouseWorldPositionX % CHUNK_SIZE;
 		u32 mouseWorldChunkPositionIndexY = mouseWorldPositionY % CHUNK_SIZE;
 
-		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSizeX;
+		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSize.x;
 		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
 
 		u32 quadVertexIDX = floatMouseWorldPosition.x % 2;
@@ -171,8 +218,8 @@ void TilemapRender::updateCanvasEdit()
 
 		if (tileActionType == 0)
 		{
-			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
-			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSize.x - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSize.y - 1) return;
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 			if (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].textureData == textureSelect) return;
@@ -195,8 +242,8 @@ void TilemapRender::updateCanvasEdit()
 		}
 		if (tileActionType == 3)
 		{
-			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
-			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSize.x - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSize.y - 1) return;
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 
@@ -250,13 +297,13 @@ void TilemapRender::updateCanvasEdit()
 		u32 mouseWorldChunkPositionIndexX = mouseWorldPositionX % CHUNK_SIZE;
 		u32 mouseWorldChunkPositionIndexY = mouseWorldPositionY % CHUNK_SIZE;
 		
-		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSizeX;
+		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSize.x;
 		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
 		
 		if (tileActionType == 1)
 		{
-			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
-			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSize.x - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSize.y - 1) return;
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 		
@@ -284,8 +331,8 @@ void TilemapRender::updateCanvasEdit()
 		}
 		if (tileActionType == 2)
 		{
-			if (mouseWorldChunkPositionX > tilemapChunkSizeX - 1) return;
-			if (mouseWorldChunkPositionY > tilemapChunkSizeY - 1) return;
+			if (mouseWorldChunkPositionX > tilemapChunkSize.x - 1) return;
+			if (mouseWorldChunkPositionY > tilemapChunkSize.y - 1) return;
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 		
@@ -344,8 +391,8 @@ void TilemapRender::draw()
 	const Frustum camFrustum = createFrustumFromCamera(camera, window.getWindowSize().x / window.getWindowSize().y, glm::radians(camera.Fov), 0.1f, 100000.0f);
 	for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
 	{
-		i32 x = i % tilemapChunkSizeX;
-		i32 y = i / tilemapChunkSizeX;
+		i32 x = i % tilemapChunkSize.x;
+		i32 y = i / tilemapChunkSize.y;
 
 		if (isAABBOnFrustum(setAABB({ x * CHUNK_SIZE, y * CHUNK_SIZE, 0 }, { (x + 1) * CHUNK_SIZE, (y + 1) * CHUNK_SIZE, 0 }), camFrustum))
 		{

@@ -7,6 +7,7 @@
 #include "Entity.h"
 #include "Consts.h"
 #include "Syncing.h"
+#include "iostream"
 
 struct tileChunk {
 	u32 oldOffset;
@@ -23,6 +24,13 @@ struct tileChunk {
 	{
 
 	}
+};
+
+struct GPUupload
+{
+	u32 size;
+	u32 offset;
+	GLsync fence;
 };
 
 struct TextureData
@@ -62,8 +70,7 @@ private:
 	u32 texture;
 	int width, height;
 
-	i32 tilemapChunkSizeX;
-	i32 tilemapChunkSizeY;
+	glm::ivec2 tilemapChunkSize;
 
 	Viewport camera;
 };

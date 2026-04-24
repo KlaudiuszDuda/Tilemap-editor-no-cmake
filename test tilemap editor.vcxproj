@@ -113,7 +113,7 @@
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,27 +142,27 @@
       <AdditionalDependencies>glfw3.lib;opengl32.lib;User32.lib;Gdi32.lib;Shell32.lib;glew32s.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
-<ItemGroup>
-  <ClCompile Include="src\EntryPoint.cpp" />
-  <ClCompile Include="src\main.cpp" />
-  <ClCompile Include="src\TilemapRender.cpp" />
-  <ClCompile Include="src\Viewport.cpp" />
-  <ClCompile Include="src\Window.cpp" />
-</ItemGroup>
-<ItemGroup>
-  <ClInclude Include="src\Allocator.h" />
-  <ClInclude Include="src\BufferObject.h" />
-  <ClInclude Include="src\Consts.h" />
-  <ClInclude Include="src\Entity.h" />
-  <ClInclude Include="src\EntryPoint.h" />
-  <ClInclude Include="src\Shader.h" />
-  <ClInclude Include="src\Syncing.h" />
-  <ClInclude Include="src\TilemapRender.h" />
-  <ClInclude Include="src\types.h" />
-  <ClInclude Include="src\Viewport.h" />
-  <ClInclude Include="src\Window.h" />
-  <ClInclude Include="src\stb_image.h" />
-</ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\EntryPoint.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TilemapRender.cpp" />
+    <ClCompile Include="src\Viewport.cpp" />
+    <ClCompile Include="src\Window.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Allocator.h" />
+    <ClInclude Include="src\BufferObject.h" />
+    <ClInclude Include="src\Consts.h" />
+    <ClInclude Include="src\Entity.h" />
+    <ClInclude Include="src\EntryPoint.h" />
+    <ClInclude Include="src\Shader.h" />
+    <ClInclude Include="src\Syncing.h" />
+    <ClInclude Include="src\TilemapRender.h" />
+    <ClInclude Include="src\types.h" />
+    <ClInclude Include="src\Viewport.h" />
+    <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\stb_image.h" />
+  </ItemGroup>
   <ItemGroup>
     <Font Include="resources\arial.ttf" />
     <Font Include="resources\fontawesome-webfont.ttf" />
@@ -170,7 +170,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\fragment.frag" />
-    <None Include="resources\gameData.data" />
     <None Include="resources\target.ogg" />
     <None Include="resources\vertex.vert" />
   </ItemGroup>
