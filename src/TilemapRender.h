@@ -30,7 +30,7 @@ struct GPUupload
 {
 	u32 size;
 	u32 offset;
-	GLsync fence;
+	Syncing fence;
 };
 
 struct TextureData
@@ -58,6 +58,8 @@ private:
 	std::vector<TextureData> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
 	std::vector<tileChunk> transferingTilemapChunkPointer;
+
+	std::vector<GPUupload> GPUUploadQueue;
 
 	u32 textureSelect = 1;
 	glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);

@@ -40,6 +40,7 @@ TilemapRender::TilemapRender()
 
 	textureVertexArray.bind(0);
 	textureTileData.init((tilemapChunkSize.x * tilemapChunkSize.y + 1) * CHUNK_SIZE_SQUARED * sizeof(TextureData));
+	GPUUploadQueue.resize(tilemapChunkSize.x * tilemapChunkSize.y);
 
 	auto& buffer = textureTileData.getBuffer();
 	u32 flags = GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT | GL_MAP_UNSYNCHRONIZED_BIT;
@@ -70,7 +71,7 @@ TilemapRender::TilemapRender()
 	fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 
 	textureVertexArray.EnableVertexAttribArray(0);
-	textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(glm::uvec4), (void*)0);
+	textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(TextureData), (void*)0);
 	textureVertexArray.VertexAttribDivisor(0, 1);
 
 	glActiveTexture(GL_TEXTURE0);
