@@ -9,23 +9,6 @@
 #include "Syncing.h"
 #include "iostream"
 
-struct tileChunk {
-	u32 oldOffset;
-	u32 newOffset;
-	u32 chunkIndex;
-
-	tileChunk(u32 oldoffset, u32 newoffset, u32 chunkindex)
-	{
-		oldOffset = oldoffset;
-		newOffset = newoffset;
-		chunkIndex = chunkindex;
-	}
-	tileChunk()
-	{
-
-	}
-};
-
 struct GPUupload
 {
 	u64 offset;
