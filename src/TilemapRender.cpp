@@ -101,6 +101,8 @@ TilemapRender::TilemapRender()
 	shader.SetVector2i("atlasTileSize", width, height);
 	shader.SetVector2i("tilemapChunkSize", tilemapChunkSize);
 	shader.SetInt("TextureAtlasID", 0);
+
+	ImGui::ShowDemoWindow();
 }
 
 TilemapRender::~TilemapRender()

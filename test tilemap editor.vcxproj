@@ -70,13 +70,25 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(ProjectDir);$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -94,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -112,7 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -130,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -143,6 +155,67 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_allegro5.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_android.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_dx10.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_dx12.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_dx9.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_glut.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_null.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_opengl2.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_sdl2.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_sdl3.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_sdlgpu3.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_sdlrenderer2.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_sdlrenderer3.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_vulkan.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_wgpu.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_allegro5\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_android_opengl3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_glfw_opengl2\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_glfw_opengl3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_glfw_vulkan\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_glfw_wgpu\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_glut_opengl2\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_null\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl2_directx11\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl2_opengl2\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl2_opengl3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl2_sdlrenderer2\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl2_vulkan\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl2_wgpu\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl3_directx11\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl3_opengl3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl3_sdlgpu3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl3_sdlrenderer3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl3_vulkan\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_sdl3_wgpu\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_win32_directx10\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_win32_directx11\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_win32_directx12\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_win32_directx9\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_win32_opengl3\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\example_win32_vulkan\main.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\examples\libs\usynergy\uSynergy.c" />
+    <ClCompile Include="Dependencies\imgui-master\imgui.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\imgui_widgets.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\misc\fonts\binary_to_compressed_c.cpp" />
+    <ClCompile Include="Dependencies\imgui-master\misc\freetype\imgui_freetype.cpp" />
+    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\TilemapRender.cpp" />
@@ -150,6 +223,51 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_allegro5.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_android.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_dx10.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_dx12.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_dx9.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_glut.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_metal.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_null.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_opengl2.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_osx.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_sdl2.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_sdl3.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_sdlgpu3.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_sdlgpu3_shaders.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_sdlrenderer2.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_sdlrenderer3.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_vulkan.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_wgpu.h" />
+    <ClInclude Include="Dependencies\imgui-master\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Dependencies\imgui-master\examples\example_allegro5\imconfig_allegro5.h" />
+    <ClInclude Include="Dependencies\imgui-master\examples\libs\emscripten\emscripten_mainloop_stub.h" />
+    <ClInclude Include="Dependencies\imgui-master\examples\libs\glfw\include\GLFW\glfw3.h" />
+    <ClInclude Include="Dependencies\imgui-master\examples\libs\glfw\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Dependencies\imgui-master\examples\libs\usynergy\uSynergy.h" />
+    <ClInclude Include="Dependencies\imgui-master\imconfig.h" />
+    <ClInclude Include="Dependencies\imgui-master\imgui.h" />
+    <ClInclude Include="Dependencies\imgui-master\imgui_internal.h" />
+    <ClInclude Include="Dependencies\imgui-master\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\imgui-master\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\imgui-master\imstb_truetype.h" />
+    <ClInclude Include="Dependencies\imgui-master\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="Dependencies\imgui-master\misc\freetype\imgui_freetype.h" />
+    <ClInclude Include="Dependencies\imgui-master\misc\single_file\imgui_single_file.h" />
+    <ClInclude Include="Dependencies\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Dependencies\imgui\imconfig.h" />
+    <ClInclude Include="Dependencies\imgui\imgui.h" />
+    <ClInclude Include="Dependencies\imgui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\imgui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\imgui\imstb_truetype.h" />
     <ClInclude Include="src\Allocator.h" />
     <ClInclude Include="src\BufferObject.h" />
     <ClInclude Include="src\Consts.h" />
@@ -169,6 +287,7 @@
     <Font Include="resources\roboto_black.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Dependencies\imgui-master\examples\libs\emscripten\shell_minimal.html" />
     <None Include="resources\fragment.frag" />
     <None Include="resources\target.ogg" />
     <None Include="resources\vertex.vert" />

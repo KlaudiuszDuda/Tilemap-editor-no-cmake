@@ -9,6 +9,8 @@
 #include "Syncing.h"
 #include "iostream"
 
+#include <imgui.h>
+
 struct GPUupload
 {
 	u64 offset;

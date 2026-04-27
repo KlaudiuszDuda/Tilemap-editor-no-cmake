@@ -1,78 +1,116 @@
-﻿  EntryPoint.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  TilemapRender.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(53,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(63,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(121,32): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(121,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(121,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(121,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(121,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(125,32): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(125,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(125,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(125,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(125,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(129,32): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(129,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(129,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(129,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(129,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(133,32): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(133,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(133,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(133,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(133,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(137,32): warning C4244: '-=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(137,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(137,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(137,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(137,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(145,32): warning C4244: '+=': conversion from 'f64' to 'T', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(145,32): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(145,32): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(145,32): warning C4244:             T=float
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(145,32): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(159,21): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(219,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(220,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(246,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(247,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(309,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(310,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(341,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(342,33): warning C4018: '>': signed/unsigned mismatch
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(395,46): warning C4244: '=': conversion from 'u64' to '_Ty', possible loss of data
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(395,46): warning C4244:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(395,46): warning C4244:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(395,46): warning C4244:             _Ty=u32
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(395,46): warning C4244:         ]
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(413,88): warning C4312: 'type cast': conversion from '_Ty' to 'void *' of greater size
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(413,88): warning C4312:         with
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(413,88): warning C4312:         [
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(413,88): warning C4312:             _Ty=u32
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\TilemapRender.cpp(413,88): warning C4312:         ]
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui_impl_opengl3.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\backends\imgui_impl_opengl3.cpp, Dependencies\imgui\backends\imgui_impl_opengl3.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui_impl_win32.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\backends\imgui_impl_win32.cpp, Dependencies\imgui\backends\imgui_impl_win32.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of main.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\examples\example_allegro5\main.cpp, Dependencies\imgui-master\examples\example_android_opengl3\main.cpp, Dependencies\imgui-master\examples\example_glfw_opengl2\main.cpp, Dependencies\imgui-master\examples\example_glfw_opengl3\main.cpp, Dependencies\imgui-master\examples\example_glfw_vulkan\main.cpp, Dependencies\imgui-master\examples\example_glfw_wgpu\main.cpp, Dependencies\imgui-master\examples\example_glut_opengl2\main.cpp, Dependencies\imgui-master\examples\example_null\main.cpp, Dependencies\imgui-master\examples\example_sdl2_directx11\main.cpp, Dependencies\imgui-master\examples\example_sdl2_opengl2\main.cpp, Dependencies\imgui-master\examples\example_sdl2_opengl3\main.cpp, Dependencies\imgui-master\examples\example_sdl2_sdlrenderer2\main.cpp, Dependencies\imgui-master\examples\example_sdl2_vulkan\main.cpp, Dependencies\imgui-master\examples\example_sdl2_wgpu\main.cpp, Dependencies\imgui-master\examples\example_sdl3_directx11\main.cpp, Dependencies\imgui-master\examples\example_sdl3_opengl3\main.cpp, Dependencies\imgui-master\examples\example_sdl3_sdlgpu3\main.cpp, Dependencies\imgui-master\examples\example_sdl3_sdlrenderer3\main.cpp, Dependencies\imgui-master\examples\example_sdl3_vulkan\main.cpp, Dependencies\imgui-master\examples\example_sdl3_wgpu\main.cpp, Dependencies\imgui-master\examples\example_win32_directx10\main.cpp, Dependencies\imgui-master\examples\example_win32_directx11\main.cpp, Dependencies\imgui-master\examples\example_win32_directx12\main.cpp, Dependencies\imgui-master\examples\example_win32_directx9\main.cpp, Dependencies\imgui-master\examples\example_win32_opengl3\main.cpp, Dependencies\imgui-master\examples\example_win32_vulkan\main.cpp, src\main.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\imgui.cpp, Dependencies\imgui\imgui.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui_demo.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\imgui_demo.cpp, Dependencies\imgui\imgui_demo.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui_draw.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\imgui_draw.cpp, Dependencies\imgui\imgui_draw.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui_tables.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\imgui_tables.cpp, Dependencies\imgui\imgui_tables.cpp.
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(1119,5): warning MSB8027: Two or more files with the name of imgui_widgets.cpp will produce outputs to the same location. This can lead to an incorrect build result.  The files involved are Dependencies\imgui-master\imgui_widgets.cpp, Dependencies\imgui\imgui_widgets.cpp.
+  imgui_impl_allegro5.cpp
+  imgui_impl_android.cpp
+  imgui_impl_dx10.cpp
+  imgui_impl_dx11.cpp
+/Dependencies/imgui-master/backends/imgui_impl_allegro5.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_allegro5.cpp': No such file or directory
+/Dependencies/imgui-master/backends/imgui_impl_android.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_android.cpp': No such file or directory
+/Dependencies/imgui-master/backends/imgui_impl_dx10.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_dx10.cpp': No such file or directory
+/Dependencies/imgui-master/backends/imgui_impl_dx11.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_dx11.cpp': No such file or directory
+  imgui_impl_dx12.cpp
+/Dependencies/imgui-master/backends/imgui_impl_dx12.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_dx12.cpp': No such file or directory
+  imgui_impl_dx9.cpp
+/Dependencies/imgui-master/backends/imgui_impl_dx9.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_dx9.cpp': No such file or directory
+  imgui_impl_glfw.cpp
+/Dependencies/imgui-master/backends/imgui_impl_glfw.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_glfw.cpp': No such file or directory
+  imgui_impl_glut.cpp
+/Dependencies/imgui-master/backends/imgui_impl_glut.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_glut.cpp': No such file or directory
+  imgui_impl_null.cpp
+/Dependencies/imgui-master/backends/imgui_impl_null.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_null.cpp': No such file or directory
+  imgui_impl_opengl2.cpp
+/Dependencies/imgui-master/backends/imgui_impl_opengl2.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_opengl2.cpp': No such file or directory
+  imgui_impl_opengl3.cpp
+/Dependencies/imgui-master/backends/imgui_impl_opengl3.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_opengl3.cpp': No such file or directory
+  imgui_impl_sdl2.cpp
+/Dependencies/imgui-master/backends/imgui_impl_sdl2.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_sdl2.cpp': No such file or directory
+  imgui_impl_sdl3.cpp
+/Dependencies/imgui-master/backends/imgui_impl_sdl3.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_sdl3.cpp': No such file or directory
+  imgui_impl_sdlgpu3.cpp
+/Dependencies/imgui-master/backends/imgui_impl_sdlgpu3.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_sdlgpu3.cpp': No such file or directory
+  imgui_impl_sdlrenderer2.cpp
+/Dependencies/imgui-master/backends/imgui_impl_sdlrenderer2.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_sdlrenderer2.cpp': No such file or directory
+  imgui_impl_sdlrenderer3.cpp
+/Dependencies/imgui-master/backends/imgui_impl_sdlrenderer3.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_sdlrenderer3.cpp': No such file or directory
+  imgui_impl_vulkan.cpp
+/Dependencies/imgui-master/backends/imgui_impl_vulkan.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_vulkan.cpp': No such file or directory
+  imgui_impl_wgpu.cpp
+/Dependencies/imgui-master/backends/imgui_impl_wgpu.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_wgpu.cpp': No such file or directory
+  imgui_impl_win32.cpp
+/Dependencies/imgui-master/backends/imgui_impl_win32.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\backends\imgui_impl_win32.cpp': No such file or directory
   main.cpp
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(21,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(73,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(80,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(88,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Shader.h(270,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
-  Generating code
-C:\Users\D3032328\Downloads\Tilemap editor no cmake\src\Allocator.h(149): warning C4715: 'kl::ChunkBufferAllocator::alloc_init': not all control paths return a value
-  195 of 766 functions (25.5%) were compiled, the rest were copied from previous compilation.
-    101 functions were new in current compilation
-    54 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-glew32s.lib(glew.obj) : warning LNK4099: PDB '' was not found with 'glew32s.lib(glew.obj)' or at ''; linking object as if no debug info
-  test tilemap editor.vcxproj -> C:\Users\D3032328\Downloads\Tilemap editor no cmake\x64\Release\test tilemap editor.exe
+/Dependencies/imgui-master/examples/example_allegro5/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_allegro5\main.cpp': No such file or directory
+  Compiling...
+  main.cpp
+/Dependencies/imgui-master/examples/example_android_opengl3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_android_opengl3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_glfw_opengl2/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_glfw_opengl2\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_glfw_opengl3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_glfw_opengl3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_glfw_vulkan/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_glfw_vulkan\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_glfw_wgpu/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_glfw_wgpu\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_glut_opengl2/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_glut_opengl2\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_null/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_null\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl2_directx11/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl2_directx11\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl2_opengl2/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl2_opengl2\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl2_opengl3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl2_opengl3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl2_sdlrenderer2/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl2_sdlrenderer2\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl2_vulkan/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl2_vulkan\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl2_wgpu/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl2_wgpu\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl3_directx11/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl3_directx11\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl3_opengl3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl3_opengl3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl3_sdlgpu3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl3_sdlgpu3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl3_sdlrenderer3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl3_sdlrenderer3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl3_vulkan/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl3_vulkan\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_sdl3_wgpu/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_sdl3_wgpu\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_win32_directx10/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_win32_directx10\main.cpp': No such file or directory
+  Compiling...
+  main.cpp
+/Dependencies/imgui-master/examples/example_win32_directx11/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_win32_directx11\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_win32_directx12/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_win32_directx12\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_win32_directx9/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_win32_directx9\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_win32_opengl3/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_win32_opengl3\main.cpp': No such file or directory
+  main.cpp
+/Dependencies/imgui-master/examples/example_win32_vulkan/main.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\examples\example_win32_vulkan\main.cpp': No such file or directory
+  imgui.cpp
+/Dependencies/imgui-master/imgui.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\imgui.cpp': No such file or directory
+  imgui_demo.cpp
+/Dependencies/imgui-master/imgui_demo.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\imgui_demo.cpp': No such file or directory
+  imgui_draw.cpp
+/Dependencies/imgui-master/imgui_draw.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\imgui_draw.cpp': No such file or directory
+  imgui_tables.cpp
+/Dependencies/imgui-master/imgui_tables.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\imgui_tables.cpp': No such file or directory
+  imgui_widgets.cpp
+/Dependencies/imgui-master/imgui_widgets.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\imgui_widgets.cpp': No such file or directory
+  imgui_stdlib.cpp
+/Dependencies/imgui-master/misc/cpp/imgui_stdlib.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\misc\cpp\imgui_stdlib.cpp': No such file or directory
+  binary_to_compressed_c.cpp
+/Dependencies/imgui-master/misc/fonts/binary_to_compressed_c.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\misc\fonts\binary_to_compressed_c.cpp': No such file or directory
+  imgui_freetype.cpp
+/Dependencies/imgui-master/misc/freetype/imgui_freetype.cpp(1,1): error C1083: Cannot open source file: 'Dependencies\imgui-master\misc\freetype\imgui_freetype.cpp': No such file or directory
