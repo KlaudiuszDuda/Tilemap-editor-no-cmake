@@ -9,6 +9,7 @@
 #include "Syncing.h"
 #include "iostream"
 
+#include <imgui_impl_opengl3.h>
 #include <imgui.h>
 
 struct GPUupload
@@ -47,6 +48,8 @@ private:
 	u32 textureSelect = 1;
 	glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);
 	u32 tileActionType = 0;
+
+	bool my_tool_active;
 
 	VertexArray<1> textureVertexArray;
 	Shader shader;

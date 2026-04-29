@@ -100,9 +100,34 @@ TilemapRender::TilemapRender()
 
 	shader.SetVector2i("atlasTileSize", width, height);
 	shader.SetVector2i("tilemapChunkSize", tilemapChunkSize);
+
 	shader.SetInt("TextureAtlasID", 0);
 
-	ImGui::ShowDemoWindow();
+	ImGui::CreateContext();
+	ImGui_ImplOpenGL3_Init("#version 330");
+
+	
+
+	ImGuiIO& io = ImGui::GetIO();
+
+	io.DisplaySize = ImVec2(800.f, 500.f);
+
+	io.Fonts->AddFontFromFileTTF("resources/arial.ttf", 16.0f);
+
+	unsigned char* pixels;
+	int w, h;
+	io.Fonts->GetTexDataAsRGBA32(&pixels, &w, &h);
+
+	u32 tex;
+	glGenTextures(1, &tex);
+	glBindTexture(GL_TEXTURE_2D, tex);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+
+	io.Fonts->TexID = (ImTextureID)(uintptr_t)tex;
 }
 
 TilemapRender::~TilemapRender()
@@ -398,6 +423,49 @@ void TilemapRender::draw()
 			GPUUploadQueue[i].fence.DeleteSync();
 		}
 	}
+	
+	//ImGuiIO& io = ImGui::GetIO();
+	//glActiveTexture(GL_TEXTURE0);
+	//glBindTexture(GL_TEXTURE_2D, (GLuint)(uintptr_t)io.Fonts->TexID._TexID);
+	ImGui_ImplOpenGL3_NewFrame();
+	ImGui::NewFrame();
+
+	ImGui::Begin("My First Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
+	if (ImGui::BeginMenuBar())
+	{
+		if (ImGui::BeginMenu("File"))
+		{
+			if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
+			if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
+			if (ImGui::MenuItem("Close", "Ctrl+W")) { my_tool_active = false; }
+			ImGui::EndMenu();
+		}
+		ImGui::EndMenuBar();
+	}
+
+	// Edit a color stored as 4 floats
+	float my_color[4] = { 0, 0, 0, 0 };
+	ImGui::ColorEdit4("Color", my_color);
+
+	// Generate samples and plot them
+	float samples[100];
+	for (int n = 0; n < 100; n++)
+		samples[n] = sinf(n * 0.2f + ImGui::GetTime() * 1.5f);
+	ImGui::PlotLines("Samples", samples, 100);
+
+	// Display contents in a scrolling region
+	ImGui::TextColored(ImVec4(1, 1, 0, 1), "Important Stuff");
+	ImGui::BeginChild("Scrolling");
+	for (int n = 0; n < 50; n++)
+		ImGui::Text("%04d: Some text", n);
+	ImGui::EndChild();
+	ImGui::End();
+
+	ImGui::Render();
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, texture);
 
 	glDisable(GL_CULL_FACE);
 	shader.SetMatrix4("viewAndProjection", camera.getViewAndProjection());
