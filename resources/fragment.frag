@@ -2,7 +2,6 @@
 
 out vec4 FragColor;
 in vec2 TexCoord;
-//in vec3 RGB;
 in float brightness;
 
 in vec3 corner0; // bottom-left

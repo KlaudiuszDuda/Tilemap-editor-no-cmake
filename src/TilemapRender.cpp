@@ -106,8 +106,6 @@ TilemapRender::TilemapRender()
 	ImGui::CreateContext();
 	ImGui_ImplOpenGL3_Init("#version 330");
 
-	
-
 	ImGuiIO& io = ImGui::GetIO();
 
 	io.DisplaySize = ImVec2(800.f, 500.f);
@@ -426,7 +424,7 @@ void TilemapRender::draw()
 	
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
-
+	
 	ImGui::Begin("My First Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
 	if (ImGui::BeginMenuBar())
 	{
@@ -439,17 +437,17 @@ void TilemapRender::draw()
 		}
 		ImGui::EndMenuBar();
 	}
-
+	
 	// Edit a color stored as 4 floats
 	float my_color[4] = { 0.5f, 0.5f, 0.5f, 0 };
 	ImGui::ColorEdit4("Color", my_color);
-
+	
 	// Generate samples and plot them
 	float samples[100];
 	for (int n = 0; n < 100; n++)
 		samples[n] = sinf(n * 0.2f + ImGui::GetTime() * 1.5f);
 	ImGui::PlotLines("Samples", samples, 100);
-
+	
 	// Display contents in a scrolling region
 	ImGui::TextColored(ImVec4(1, 1, 0, 1), "Important Stuff");
 	ImGui::BeginChild("Scrolling");
@@ -457,7 +455,7 @@ void TilemapRender::draw()
 		ImGui::Text("%04d: Some text", n);
 	ImGui::EndChild();
 	ImGui::End();
-
+	
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 

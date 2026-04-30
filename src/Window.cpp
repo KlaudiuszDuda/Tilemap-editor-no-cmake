@@ -5,7 +5,6 @@ Callback callback;
 Input input;
 Window window;
 ProgramTime Time;
-RNG rng;
 
 void GLAPIENTRY glDebugOutput(GLenum source,
     GLenum type,

@@ -29,24 +29,6 @@ namespace kl
     }
 
     template<typename T>
-    inline T* allocate_initialized(u64 capacity, const T& initializedTo)
-    {
-        T* data = (T*)::operator new(capacity * sizeof(T));
-
-        if constexpr (std::is_trivial_v<T>)
-        {
-            std::memset(data, initializedTo, capacity * sizeof(T));
-        }
-        else
-        {
-            for (u32 i = 0; i < capacity; ++i)
-                new (&data[i]) T(initializedTo);
-        }
-
-        return data;
-    }
-
-    template<typename T>
     inline T* allocate_zeroed(u64 capacity)
     {
         T* data = (T*)::operator new(capacity * sizeof(T));

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "types.h"
-
 #include <GL/glew.h>
 
 struct DrawArraysIndirectCommand {

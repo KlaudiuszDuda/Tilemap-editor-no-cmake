@@ -103,19 +103,6 @@ public:
 	}
 };
 
-class RNG
-{
-public:
-	u32 rand = 0;
-
-	inline u32& randuint()
-	{
-		rand = (rand << 13) ^ rand;
-		rand = ((rand * (rand * rand * 15731 + 789221) + 1376312589) & 0x7fffffff);
-		return rand;
-	}
-};
-
 class Window
 {
 public:
@@ -138,4 +125,3 @@ public:
 extern Input input;
 extern Window window;
 extern ProgramTime Time;
-extern RNG rng;
