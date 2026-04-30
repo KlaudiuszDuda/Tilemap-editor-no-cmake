@@ -1,11 +1,10 @@
-#version 430 core
+#version 330 core
 
 layout (location = 0) in uvec4 textureData;
-layout (location = 1) in uint baseInstanceX;
-layout (location = 2) in uint baseInstanceY;
+layout (location = 1) in int baseInstanceX;
+layout (location = 2) in int baseInstanceY;
 
 out vec2 TexCoord;
-//out vec3 RGB;
 out float brightness;
 
 out vec3 corner0; // bottom-left
@@ -20,31 +19,33 @@ uniform ivec2 atlasTileSize;
 uniform ivec2 tilemapChunkSize;
 
 // Quad corners (0..3)
-ivec2 baseUVs[4] = ivec2[](
-    ivec2(0, 0), // bottom-left
-    ivec2(1, 0), // bottom-right
-    ivec2(0, 1), // top-left
-    ivec2(1, 1)  // top-right
+ivec2 baseUVs[4] = ivec2[4](
+    ivec2(0, 0),
+    ivec2(1, 0),
+    ivec2(0, 1),
+    ivec2(1, 1)
 );
 
 // Rotation lookup (no branches, fast)
-const int rotLUT[4][4] = int[4][4](
-    int[4](0, 1, 2, 3), // 0°
-    int[4](2, 3, 0, 1), // 90°
-    int[4](3, 2, 1, 0), // 180°
-    int[4](1, 0, 3, 2)  // 270°
+const int rotLUT[16] = int[16](
+    0, 1, 2, 3,
+    2, 3, 0, 1,
+    3, 2, 1, 0,
+    1, 0, 3, 2
 );
 
 void main()
 {
-    uint quadVertexID = gl_VertexID & 3;
-    uint tileX = (textureData.x & 255) % atlasTileSize.x;
-    uint tileY = (textureData.x & 255) / atlasTileSize.x;
+    int quadVertexID = gl_VertexID & 3;
+    
+    int tile = int(textureData.x & 255u);
+    int tileX = tile % atlasTileSize.x;
+    int tileY = tile / atlasTileSize.x;
 
     int rotation = int((textureData.x >> 8) & 3u);
     int flip = int((textureData.x >> 10) & 1u);
 
-    int rotatedIndex = rotLUT[rotation][gl_VertexID];
+    int rotatedIndex = rotLUT[rotation * 4 + quadVertexID];
 
     ivec2 uv = baseUVs[rotatedIndex];
 

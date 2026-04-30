@@ -52,6 +52,10 @@ public:
     {
         glVertexAttribI1ui(location, v0);
     }
+    inline void VertexAttribI1i(GLuint location, GLint v0)
+    {
+        glVertexAttribI1i(location, v0);
+    }
     inline void DrawArraysInstanced(GLenum mode, GLint first, GLsizei count, GLsizei primcount)
     {
         glDrawArraysInstanced(mode, first, count, primcount);

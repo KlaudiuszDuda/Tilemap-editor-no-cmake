@@ -424,9 +424,6 @@ void TilemapRender::draw()
 		}
 	}
 	
-	//ImGuiIO& io = ImGui::GetIO();
-	//glActiveTexture(GL_TEXTURE0);
-	//glBindTexture(GL_TEXTURE_2D, (GLuint)(uintptr_t)io.Fonts->TexID._TexID);
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
 
@@ -444,7 +441,7 @@ void TilemapRender::draw()
 	}
 
 	// Edit a color stored as 4 floats
-	float my_color[4] = { 0, 0, 0, 0 };
+	float my_color[4] = { 0.5f, 0.5f, 0.5f, 0 };
 	ImGui::ColorEdit4("Color", my_color);
 
 	// Generate samples and plot them
@@ -478,8 +475,8 @@ void TilemapRender::draw()
 
 		if (isAABBOnFrustum(setAABB({ x * CHUNK_SIZE, y * CHUNK_SIZE, 0 }, { (x + 1) * CHUNK_SIZE, (y + 1) * CHUNK_SIZE, 0 }), camFrustum))
 		{
-			textureVertexArray.VertexAttribI1ui(1, x);
-			textureVertexArray.VertexAttribI1ui(2, y);
+			textureVertexArray.VertexAttribI1i(1, x);
+			textureVertexArray.VertexAttribI1i(2, y);
 			textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(TextureData), (void*)(tilemapChunkPointer[i]));
 			textureVertexArray.DrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, CHUNK_SIZE_SQUARED);
 		}
