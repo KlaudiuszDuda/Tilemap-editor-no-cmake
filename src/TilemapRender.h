@@ -46,10 +46,11 @@ private:
 	std::vector<GPUupload> GPUUploadQueue;
 
 	u32 textureSelect = 1;
-	glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);
+	//glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);
 	u32 tileActionType = 0;
 
 	bool my_tool_active;
+	float colorSelected[3] = { 0.f, 1.f, 0.f};
 
 	VertexArray<1> textureVertexArray;
 	Shader shader;

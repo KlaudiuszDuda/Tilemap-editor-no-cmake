@@ -103,29 +103,26 @@ TilemapRender::TilemapRender()
 
 	shader.SetInt("TextureAtlasID", 0);
 
-	ImGui::CreateContext();
-	ImGui_ImplOpenGL3_Init("#version 330");
 
-	ImGuiIO& io = ImGui::GetIO();
+	
+	//io.Fonts->AddFontFromFileTTF("resources/arial.ttf", 16.0f);
+	//
+	//unsigned char* pixels;
+	//int w, h;
+	//io.Fonts->GetTexDataAsRGBA32(&pixels, &w, &h);
+	//
+	//u32 tex;
+	//glGenTextures(1, &tex);
+	//glBindTexture(GL_TEXTURE_2D, tex);
+	//
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	//
+	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+	//
+	//io.Fonts->TexID = (ImTextureID)(uintptr_t)tex;
 
-	io.DisplaySize = ImVec2(800.f, 500.f);
 
-	io.Fonts->AddFontFromFileTTF("resources/arial.ttf", 16.0f);
-
-	unsigned char* pixels;
-	int w, h;
-	io.Fonts->GetTexDataAsRGBA32(&pixels, &w, &h);
-
-	u32 tex;
-	glGenTextures(1, &tex);
-	glBindTexture(GL_TEXTURE_2D, tex);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-
-	io.Fonts->TexID = (ImTextureID)(uintptr_t)tex;
 }
 
 TilemapRender::~TilemapRender()
@@ -203,18 +200,6 @@ void TilemapRender::updateCamera()
 	{
 		tileActionType = 3;
 	}
-	if (input.getKeyboard(GLFW_KEY_0))
-	{
-		colorSelected = glm::uvec3(0, 0, 0);
-	}
-	if (input.getKeyboard(GLFW_KEY_1))
-	{
-		colorSelected = glm::uvec3(0x80, 0x80, 0x80);
-	}
-	if (input.getKeyboard(GLFW_KEY_2))
-	{
-		colorSelected = glm::uvec3(0xFF, 0xFF, 0xFF);
-	}
 }
 
 void TilemapRender::updateCanvasEdit()
@@ -273,30 +258,32 @@ void TilemapRender::updateCanvasEdit()
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 
-			u32 R = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].R >> (8 * quadVertexID)) & 255u;
-			u32 G = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].G >> (8 * quadVertexID)) & 255u;
-			u32 B = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].B >> (8 * quadVertexID)) & 255u;
-			if (R == (colorSelected.x & 255u)) return;
-			if (G == (colorSelected.y & 255u)) return;
-			if (B == (colorSelected.z & 255u)) return;
+			u32 colorR = (u32)(colorSelected[0] * 256);
+			u32 colorG = (u32)(colorSelected[1] * 256);
+			u32 colorB = (u32)(colorSelected[2] * 256);
+
+			int shift = quadVertexID * 8;
+
+			u32 R = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].R >> shift) & 255u;
+			u32 G = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].G >> shift) & 255u;
+			u32 B = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].B >> shift) & 255u;
+			if (R == colorR && G == colorG && B == colorB) return;
 
 			if (!GPUUploadQueue[mouseWorldChunkIndex].fence.IsNotSynced()) return;
 
 			u32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 
-			int shift = quadVertexID * 8;
-
 			tilemapBuffer[TileIndex].R =
 				(tilemapBuffer[TileIndex].R & ~(0xFFu << shift)) |
-				((colorSelected.x & 0xFFu) << shift);
+				((colorR) << shift);
 
 			tilemapBuffer[TileIndex].G =
 				(tilemapBuffer[TileIndex].G & ~(0xFFu << shift)) |
-				((colorSelected.y & 0xFFu) << shift);
+				((colorG) << shift);
 
 			tilemapBuffer[TileIndex].B =
 				(tilemapBuffer[TileIndex].B & ~(0xFFu << shift)) |
-				((colorSelected.z & 0xFFu) << shift);
+				((colorB) << shift);
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
 
@@ -438,24 +425,9 @@ void TilemapRender::draw()
 		ImGui::EndMenuBar();
 	}
 	
-	// Edit a color stored as 4 floats
-	float my_color[4] = { 0.5f, 0.5f, 0.5f, 0 };
-	ImGui::ColorEdit4("Color", my_color);
-	
-	// Generate samples and plot them
-	float samples[100];
-	for (int n = 0; n < 100; n++)
-		samples[n] = sinf(n * 0.2f + ImGui::GetTime() * 1.5f);
-	ImGui::PlotLines("Samples", samples, 100);
-	
-	// Display contents in a scrolling region
-	ImGui::TextColored(ImVec4(1, 1, 0, 1), "Important Stuff");
-	ImGui::BeginChild("Scrolling");
-	for (int n = 0; n < 50; n++)
-		ImGui::Text("%04d: Some text", n);
-	ImGui::EndChild();
+	ImGui::ColorPicker3("Color", colorSelected);
 	ImGui::End();
-	
+
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
