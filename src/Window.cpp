@@ -222,11 +222,7 @@ Window::Window()
             callback.m_GamepadsConnected++;
         }
     }
-    //glfwSetKeyCallback(p_Window, Callback::updateKeyboardCallback);
-    //glfwSetMouseButtonCallback(p_Window, Callback::updateMouseButtonCallback);
-    //glfwSetScrollCallback(p_Window, Callback::updateScrollWheelCallback);
-    //
-    //glfwSetCursorPosCallback(p_Window, Callback::windowMousePositionEvent);
+
     glfwSetFramebufferSizeCallback(p_Window, Callback::windowResizeEvent);
 
     glfwSetCursorPos(p_Window, 0.0, 0.0);

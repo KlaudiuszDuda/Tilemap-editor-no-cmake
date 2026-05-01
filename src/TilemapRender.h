@@ -24,6 +24,17 @@ struct TextureData
 	u32 R;
 	u32 G;
 	u32 B;
+
+	TextureData(u32 texture, u32 red, u32 green, u32 blue)
+	{
+		textureData = texture;
+		R = red;
+		G = green;
+		B = blue;
+	}
+	TextureData()
+	{
+	}
 };
 
 class TilemapRender
@@ -46,11 +57,11 @@ private:
 	std::vector<GPUupload> GPUUploadQueue;
 
 	u32 textureSelect = 1;
-	//glm::uvec3 colorSelected = glm::uvec3(0xFF, 0x40, 0xFF);
+	glm::uvec3 colorChoosen = glm::uvec3(0xFF, 0x40, 0xFF);
 	u32 tileActionType = 0;
 
 	bool my_tool_active;
-	float colorSelected[3] = { 0.f, 1.f, 0.f};
+	float colorSelected[3] = { 0.f, 0.f, 0.f};
 
 	VertexArray<1> textureVertexArray;
 	Shader shader;

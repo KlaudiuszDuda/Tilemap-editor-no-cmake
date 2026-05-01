@@ -24,6 +24,7 @@ TilemapRender::TilemapRender()
 		tilemapChunkSize.y = 4;
 
 		tilemapBuffer.resize(tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED);
+		std::fill(tilemapBuffer.data(), tilemapBuffer.data() + tilemapBuffer.size(), TextureData(0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF));
 	}
 	else
 	{
@@ -48,15 +49,14 @@ TilemapRender::TilemapRender()
 
 	if (size == 0)
 	{
-		void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, 0, 1, flags);
-
 		for (u32 i = 0; i < tilemapChunkSize.x * tilemapChunkSize.y; i++)
 		{
-			GPUUploadQueue[i].offset = textureTileData.alloc_init(dst, CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			GPUUploadQueue[i].offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			TextureData* dst = (TextureData*)buffer.MapBufferRange(GL_ARRAY_BUFFER, GPUUploadQueue[i].offset, CHUNK_SIZE_SQUARED * sizeof(TextureData), flags);
+			std::fill(dst, dst + CHUNK_SIZE_SQUARED, TextureData(0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF));
 			GPUUploadQueue[i].fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
+			buffer.UnmapBuffer(GL_ARRAY_BUFFER);
 		}
-
-		buffer.UnmapBuffer(GL_ARRAY_BUFFER);
 	}
 	else
 	{
@@ -102,27 +102,6 @@ TilemapRender::TilemapRender()
 	shader.SetVector2i("tilemapChunkSize", tilemapChunkSize);
 
 	shader.SetInt("TextureAtlasID", 0);
-
-
-	
-	//io.Fonts->AddFontFromFileTTF("resources/arial.ttf", 16.0f);
-	//
-	//unsigned char* pixels;
-	//int w, h;
-	//io.Fonts->GetTexDataAsRGBA32(&pixels, &w, &h);
-	//
-	//u32 tex;
-	//glGenTextures(1, &tex);
-	//glBindTexture(GL_TEXTURE_2D, tex);
-	//
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	//glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	//
-	//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-	//
-	//io.Fonts->TexID = (ImTextureID)(uintptr_t)tex;
-
-
 }
 
 TilemapRender::~TilemapRender()
@@ -258,20 +237,19 @@ void TilemapRender::updateCanvasEdit()
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 
-			u32 colorR = (u32)(colorSelected[0] * 256);
-			u32 colorG = (u32)(colorSelected[1] * 256);
-			u32 colorB = (u32)(colorSelected[2] * 256);
+			u32 colorR = (u32)(colorSelected[0] * 255);
+			u32 colorG = (u32)(colorSelected[1] * 255);
+			u32 colorB = (u32)(colorSelected[2] * 255);
 
 			int shift = quadVertexID * 8;
+			u32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 
-			u32 R = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].R >> shift) & 255u;
-			u32 G = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].G >> shift) & 255u;
-			u32 B = (tilemapBuffer[mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED].B >> shift) & 255u;
+			u32 R = (tilemapBuffer[TileIndex].R >> shift) & 255u;
+			u32 G = (tilemapBuffer[TileIndex].G >> shift) & 255u;
+			u32 B = (tilemapBuffer[TileIndex].B >> shift) & 255u;
 			if (R == colorR && G == colorG && B == colorB) return;
 
 			if (!GPUUploadQueue[mouseWorldChunkIndex].fence.IsNotSynced()) return;
-
-			u32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 
 			tilemapBuffer[TileIndex].R =
 				(tilemapBuffer[TileIndex].R & ~(0xFFu << shift)) |
@@ -284,6 +262,10 @@ void TilemapRender::updateCanvasEdit()
 			tilemapBuffer[TileIndex].B =
 				(tilemapBuffer[TileIndex].B & ~(0xFFu << shift)) |
 				((colorB) << shift);
+
+			u32 red = tilemapBuffer[TileIndex].R >> shift & 255u;
+			u32 green = tilemapBuffer[TileIndex].G >> shift & 255u;
+			u32 blue = tilemapBuffer[TileIndex].B >> shift & 255u;
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
 
@@ -433,6 +415,8 @@ void TilemapRender::draw()
 
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, texture);
+
+	shader.bind();
 
 	glDisable(GL_CULL_FACE);
 	shader.SetMatrix4("viewAndProjection", camera.getViewAndProjection());
