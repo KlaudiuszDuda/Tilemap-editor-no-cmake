@@ -16,7 +16,6 @@ out vec2 vQuadUV;
 
 uniform mat4 viewAndProjection;
 uniform ivec2 atlasTileSize;
-uniform ivec2 tilemapChunkSize;
 
 // Quad corners (0..3)
 ivec2 baseUVs[4] = ivec2[4](

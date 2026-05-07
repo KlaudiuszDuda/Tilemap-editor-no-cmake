@@ -4,6 +4,8 @@
 
 TilemapRender::TilemapRender()
 {
+	isInitialized = true;
+
 	std::ifstream tilemapData;
 
 	tilemapData.open("resources/tilemap.tmk", std::ios::binary | std::ios::in | std::ios::ate);
@@ -67,7 +69,6 @@ TilemapRender::TilemapRender()
 			memcpy(dst, tilemapBuffer.data() + GPUUploadQueue[i].offset / sizeof(TextureData), CHUNK_SIZE_SQUARED * sizeof(TextureData));
 			GPUUploadQueue[i].fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 			buffer.UnmapBuffer(GL_ARRAY_BUFFER);
-
 		}
 	}
 
@@ -75,44 +76,12 @@ TilemapRender::TilemapRender()
 	textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(TextureData), (void*)0);
 	textureVertexArray.VertexAttribDivisor(0, 1);
 
-	glActiveTexture(GL_TEXTURE0);
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-
-	int channels;
-	uchar* data = stbi_load("resources/CosmicLilac_Tiles.png", &width, &height, &channels, 0);
-
-	GLenum format = channels == 4 ? GL_RGBA : GL_RGB;
-
-	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
-
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glGenerateMipmap(GL_TEXTURE_2D);
-
-	stbi_image_free(data);
-
-	shader.LoadShader("resources/vertex.vert", "resources/fragment.frag");
-	shader.bind();
-
-	width /= 16;
-	height /= 16;
-
-	shader.SetVector2i("atlasTileSize", width, height);
-	shader.SetVector2i("tilemapChunkSize", tilemapChunkSize);
-
-	shader.SetInt("TextureAtlasID", 0);
+	sliceTextureAtlas();
 }
 
 TilemapRender::~TilemapRender()
 {
-	std::ofstream tilemapData;
-
-	tilemapData.open("resources/tilemap.tmk", std::ios::binary | std::ios::out);
-	tilemapData.write(reinterpret_cast<char*>(&tilemapChunkSize), sizeof(glm::ivec2));
-	tilemapData.seekp(sizeof(glm::ivec2), std::ios::beg);
-	tilemapData.write(reinterpret_cast<char*>(tilemapBuffer.data()), tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED * sizeof(TextureData));
-	tilemapData.close();
+	saveTilemap();
 }
 
 void TilemapRender::updateCamera()
@@ -366,6 +335,50 @@ void TilemapRender::updateCanvasEdit()
 	}
 }
 
+void TilemapRender::saveTilemap()
+{
+	if (isInitialized)
+	{
+		std::ofstream tilemapData;
+
+		tilemapData.open("resources/tilemap.tmk", std::ios::binary | std::ios::out);
+		tilemapData.write(reinterpret_cast<char*>(&tilemapChunkSize), sizeof(glm::ivec2));
+		tilemapData.seekp(sizeof(glm::ivec2), std::ios::beg);
+		tilemapData.write(reinterpret_cast<char*>(tilemapBuffer.data()), tilemapChunkSize.x * tilemapChunkSize.y * CHUNK_SIZE_SQUARED * sizeof(TextureData));
+		tilemapData.close();
+	}
+}
+
+void TilemapRender::sliceTextureAtlas()
+{
+	glActiveTexture(GL_TEXTURE0);
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+
+	int channels;
+	uchar* data = stbi_load("resources/CosmicLilac_Tiles.png", &width, &height, &channels, 0);
+
+	GLenum format = channels == 4 ? GL_RGBA : GL_RGB;
+
+	glTexImage2D(GL_TEXTURE_2D, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, data);
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glGenerateMipmap(GL_TEXTURE_2D);
+
+	stbi_image_free(data);
+
+	shader.LoadShader("resources/vertex.vert", "resources/fragment.frag");
+	shader.bind();
+
+	width /= 16;
+	height /= 16;
+
+	shader.SetVector2i("atlasTileSize", width, height);
+
+	shader.SetInt("TextureAtlasID", 0);
+}
+
 void TilemapRender::update()
 {
 	updateCanvasEdit();
@@ -393,21 +406,43 @@ void TilemapRender::draw()
 	
 	ImGui_ImplOpenGL3_NewFrame();
 	ImGui::NewFrame();
+
+	ImGui::ShowDemoWindow();
 	
 	ImGui::Begin("My First Tool", &my_tool_active, ImGuiWindowFlags_MenuBar);
-	if (ImGui::BeginMenuBar())
+	if (ImGui::ColorPicker3("Color", colorSelected))
+	{
+		tileActionType = 3;
+	}
+	if (ImGui::Button("Rotate", ImVec2(50.f, 25.f)))
+	{
+		tileActionType = 1;
+	}
+	if (ImGui::Button("Flip", ImVec2(50.f, 25.f)))
+	{
+		tileActionType = 2;
+	}
+
+	if (ImGui::BeginMainMenuBar())
 	{
 		if (ImGui::BeginMenu("File"))
 		{
-			if (ImGui::MenuItem("Open..", "Ctrl+O")) { /* Do stuff */ }
-			if (ImGui::MenuItem("Save", "Ctrl+S")) { /* Do stuff */ }
-			if (ImGui::MenuItem("Close", "Ctrl+W")) { my_tool_active = false; }
+			if (ImGui::MenuItem("Open..", "Ctrl+O")) 
+			{ 
+				/* Do stuff */
+				ImGui::InputText("string", filepath, IM_COUNTOF(filepath));
+			}
+			if (ImGui::MenuItem("Save", "Ctrl+S"))
+			{ 
+				/* Do stuff */
+			}
+
 			ImGui::EndMenu();
 		}
-		ImGui::EndMenuBar();
+		ImGui::EndMainMenuBar();
 	}
+
 	
-	ImGui::ColorPicker3("Color", colorSelected);
 	ImGui::End();
 
 	ImGui::Render();
@@ -426,7 +461,7 @@ void TilemapRender::draw()
 	{
 		i32 x = i % tilemapChunkSize.x;
 		i32 y = i / tilemapChunkSize.y;
-
+	
 		if (isAABBOnFrustum(setAABB({ x * CHUNK_SIZE, y * CHUNK_SIZE, 0 }, { (x + 1) * CHUNK_SIZE, (y + 1) * CHUNK_SIZE, 0 }), camFrustum))
 		{
 			textureVertexArray.VertexAttribI1i(1, x);

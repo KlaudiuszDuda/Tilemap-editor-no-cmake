@@ -46,10 +46,14 @@ public:
 	void updateCamera();
 	void updateCanvasEdit();
 
+	void saveTilemap();
+	void sliceTextureAtlas();
+
 	void update();
 	void draw();
 
 private:
+	bool isInitialized = false;
 	kl::ChunkBufferAllocator textureTileData;
 	std::vector<TextureData> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
@@ -72,4 +76,6 @@ private:
 	glm::ivec2 tilemapChunkSize;
 
 	Viewport camera;
+
+	char filepath[100];
 };
