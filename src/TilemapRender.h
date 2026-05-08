@@ -47,13 +47,14 @@ public:
 	void updateCanvasEdit();
 
 	void saveTilemap();
-	void sliceTextureAtlas();
+	void sliceTextureAtlas(char* filename);
+	void openTilemapFile(char* filename);
+	void newTilemapFile(char* filename);
 
 	void update();
 	void draw();
 
 private:
-	bool isInitialized = false;
 	kl::ChunkBufferAllocator textureTileData;
 	std::vector<TextureData> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
@@ -64,6 +65,8 @@ private:
 	glm::uvec3 colorChoosen = glm::uvec3(0xFF, 0x40, 0xFF);
 	u32 tileActionType = 0;
 
+	bool isInitialized = false;
+
 	bool my_tool_active;
 	float colorSelected[3] = { 0.f, 0.f, 0.f};
 
@@ -72,10 +75,15 @@ private:
 
 	u32 texture;
 	int width, height;
+	int tileWidthAndHeight[2];
 
-	glm::ivec2 tilemapChunkSize;
+	int tilemapChunkSize[2];
+	int tilemapChunkSizeImGUI[2];
 
 	Viewport camera;
 
-	char filepath[100];
+	char textureAtlasName[100];
+	char tilemapDataName[100];
+
+	std::string tilemapFile;
 };

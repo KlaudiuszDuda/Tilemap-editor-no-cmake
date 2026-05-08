@@ -145,6 +145,12 @@ i32 Input::getKeyboard(u32 index)
 
 i32 Input::getMouseButton(u32 index)
 {
+
+    ImGuiIO& io = ImGui::GetIO();
+
+    if (io.WantCaptureMouse)
+        return 0;
+
     i32 input = callback.m_InputData.digital[GLFW_KEY_LAST + 1 + index];
     return input;
 }

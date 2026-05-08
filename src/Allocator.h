@@ -82,6 +82,8 @@ namespace kl
             m_Buffer.BindBuffer(GL_ARRAY_BUFFER, 0);
             m_Buffer.BufferData(GL_ARRAY_BUFFER, m_BufferSize, nullptr, GL_DYNAMIC_COPY);
     
+            m_FreeBlocks.clear();
+            m_FreeBlocks.shrink_to_fit();
             m_FreeBlocks.push_back({ 0, m_BufferSize });
         }
 
@@ -172,7 +174,7 @@ namespace kl
             void* temp = malloc(oldSize);
             glGetBufferSubData(GL_ARRAY_BUFFER, 0, oldSize, temp);
     
-            glBufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_DRAW);
+            glBufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_COPY);
             glBufferSubData(GL_ARRAY_BUFFER, 0, oldSize, temp);
             free(temp);
 
