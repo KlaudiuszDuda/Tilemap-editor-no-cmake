@@ -92,8 +92,6 @@ namespace kl
             return m_Buffer;
         }
         
-        // allocate a region of `size` bytes
-        // returns offset or (size_t)-1 on failure
         inline u32 alloc(u32 size) {
             for (u32 i = 0; i < m_FreeBlocks.size(); ++i) {
                 Block& b = m_FreeBlocks[i];
@@ -144,7 +142,6 @@ namespace kl
         u32 m_BufferSize;
         std::vector<Block> m_FreeBlocks;
     
-        // merge adjacent free blocks
         void mergeFreeBlocks() {
             std::sort(m_FreeBlocks.begin(), m_FreeBlocks.end(),
                 [](auto& a, auto& b) { return a.m_Offset < b.m_Offset; });
