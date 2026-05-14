@@ -4,7 +4,7 @@
 
 TilemapRender::TilemapRender()
 {
-
+	
 }
 
 TilemapRender::~TilemapRender()
@@ -186,16 +186,16 @@ void TilemapRender::updateCanvasEdit()
 		glm::ivec3 mouseWorldPosition = window.getWorldMousePosition(camera);
 		u32 mouseWorldPositionX = mouseWorldPosition.x;
 		u32 mouseWorldPositionY = mouseWorldPosition.y;
-		
+
 		u32 mouseWorldChunkPositionX = mouseWorldPositionX / CHUNK_SIZE;
 		u32 mouseWorldChunkPositionY = mouseWorldPositionY / CHUNK_SIZE;
-		
+
 		u32 mouseWorldChunkPositionIndexX = mouseWorldPositionX % CHUNK_SIZE;
 		u32 mouseWorldChunkPositionIndexY = mouseWorldPositionY % CHUNK_SIZE;
-		
+
 		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSize[0];
 		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
-		
+
 		if (tileActionType == 1)
 		{
 			if (mouseWorldChunkPositionX > tilemapChunkSize[0] - 1) return;
@@ -204,27 +204,27 @@ void TilemapRender::updateCanvasEdit()
 			if (mouseWorldChunkPositionY < 0) return;
 
 			if (!GPUUploadQueue[mouseWorldChunkIndex].fence.IsNotSynced()) return;
-		
+
 			u32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 			u32 rotation = ((((tilemapBuffer[TileIndex].textureData >> 30) & 3u) + 1) % 4);
 			u32 bits = (rotation << 30);
 			u32 mask = bits;
-			mask |= ((0u-1) >> 2);
+			mask |= ((0u - 1) >> 2);
 			tilemapBuffer[TileIndex].textureData &= mask;
 			tilemapBuffer[TileIndex].textureData |= bits;
-		
+
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
-		
+
 			auto& buffer = textureTileData.getBuffer();
-		
+
 			u32 flags = GL_MAP_WRITE_BIT | GL_MAP_INVALIDATE_RANGE_BIT;
 			void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, offset, CHUNK_SIZE_SQUARED * sizeof(TextureData), flags);
-		
+
 			memcpy(dst, tilemapBuffer.data() + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED, CHUNK_SIZE_SQUARED * sizeof(TextureData));
 
 			GPUUploadQueue[mouseWorldChunkIndex].fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 			GPUUploadQueue[mouseWorldChunkIndex].offset = offset;
-		
+
 			buffer.UnmapBuffer(GL_ARRAY_BUFFER);
 		}
 	}
@@ -301,7 +301,7 @@ void TilemapRender::openTilemapFile(char* filename)
 	tilemapData.read(reinterpret_cast<char*>(tileWidthAndHeight), sizeof(int) * 2);
 	tilemapData.seekg(sizeof(glm::ivec2) + 100 + sizeof(int) * 2, std::ios::beg);
 	tilemapData.read(reinterpret_cast<char*>(tilemapBuffer.data()), tilemapChunkSize[0] * tilemapChunkSize[1] * CHUNK_SIZE_SQUARED * sizeof(TextureData));
-	
+
 	tilemapData.close();
 
 	if (!isInitialized)
@@ -452,12 +452,12 @@ void TilemapRender::draw()
 		{
 			if (ImGui::BeginMenu("Open"))
 			{
-				if (ImGui::InputText("tilemap data name", tilemapDataName, IM_COUNTOF(tilemapDataName)))
+				if (ImGui::InputText("tilemap data name", tilemapDataName, IM_ARRAYSIZE(tilemapDataName)))
 				{
 					openTilemapFile(tilemapDataName);
-					if(isInitialized) sliceTextureAtlas(textureAtlasName);
+					if (isInitialized) sliceTextureAtlas(textureAtlasName);
 				}
-				
+
 				ImGui::EndMenu();
 			}
 			if (ImGui::MenuItem("Save", "Ctrl+S"))
@@ -466,11 +466,11 @@ void TilemapRender::draw()
 			}
 			if (ImGui::BeginMenu("New"))
 			{
-				ImGui::InputText("Texture Atlas Name", textureAtlasName, IM_COUNTOF(textureAtlasName));
-				ImGui::InputText("tilemap Name", tilemapDataName, IM_COUNTOF(tilemapDataName));
+				ImGui::InputText("Texture Atlas Name", textureAtlasName, IM_ARRAYSIZE(textureAtlasName));
+				ImGui::InputText("tilemap Name", tilemapDataName, IM_ARRAYSIZE(tilemapDataName));
 				ImGui::InputInt2("tile size", tileWidthAndHeight);
 				ImGui::InputInt2("tilemap chunk size", tilemapChunkSizeImGUI);
-				if(ImGui::Button("Create"))
+				if (ImGui::Button("Create"))
 				{
 					newTilemapFile(tilemapDataName);
 					sliceTextureAtlas(textureAtlasName);
@@ -486,30 +486,27 @@ void TilemapRender::draw()
 
 	ImGui::End();
 
-	if (isInitialized)
+	ImGui::Begin("Texture atlas");
+
+	ImVec2 imagePos = ImGui::GetCursorScreenPos();
+	ImVec2 imageSize = { width * 32.0f, height * 32.0f };
+
+	if(texture)ImGui::Image((ImTextureID)(intptr_t)texture, imageSize);
+
+	if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
 	{
-		ImGui::Begin("Texture atlas");
+		glm::vec2 mouse = window.getMousePosition();
 
-		ImVec2 imagePos = ImGui::GetCursorScreenPos();
-		ImVec2 imageSize = { width * 32.0f, height * 32.0f };
+		glm::ivec2 tile;
 
-		ImGui::Image((ImTextureID)(intptr_t) texture, imageSize);
+		tile.x = (i32)(mouse.x - imagePos.x) / 32.0f;
+		tile.y = (i32)(mouse.y - imagePos.y) / 32.0f;
 
-		if (ImGui::IsItemHovered() && ImGui::IsMouseClicked(ImGuiMouseButton_Left))
-		{
-			glm::vec2 mouse = window.getMousePosition();
-
-			glm::ivec2 tile;
-
-			tile.x = (i32)(mouse.x - imagePos.x) / 32.0f;
-			tile.y = (i32)(mouse.y - imagePos.y) / 32.0f;
-
-			textureSelect = tile.x + tile.y * width;
-			tileActionType = 0;
-		}
-
-		ImGui::End();
+		textureSelect = tile.x + tile.y * width;
+		tileActionType = 0;
 	}
+
+	ImGui::End();
 
 	ImGui::Render();
 	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

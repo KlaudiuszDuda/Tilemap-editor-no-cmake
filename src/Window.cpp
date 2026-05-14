@@ -101,21 +101,21 @@ void Callback::updateKeyboardCallback(GLFWwindow* window, i32 key, i32 scancode,
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
     ev->m_InputData.digital[key] = action;
-    ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
+    //ImGui_ImplGlfw_KeyCallback(window, key, scancode, action, mods);
 }
 
 void Callback::updateMouseButtonCallback(GLFWwindow* window, i32 button, i32 action, i32 mods)
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
     ev->m_InputData.digital[button + GLFW_KEY_LAST + 1] = action;
-    ImGui_ImplGlfw_MouseButtonCallback(window, button, action, mods);
+    //ImGui_ImplGlfw_MouseButtonCallback(window, button, action, mods);
 }
 
 void Callback::updateScrollWheelCallback(GLFWwindow* window, f64 xoffset, f64 yoffset)
 {
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
     ev->m_InputData.analog[GLFW_KEY_LAST + 1 + GLFW_MOUSE_BUTTON_LAST + 1] = yoffset;
-    ImGui_ImplGlfw_ScrollCallback(window, xoffset, yoffset);
+    //ImGui_ImplGlfw_ScrollCallback(window, xoffset, yoffset);
 }
 
 void Callback::windowResizeEvent(GLFWwindow* window, i32 xposIn, i32 yposIn)
@@ -135,7 +135,7 @@ void Callback::windowMousePositionEvent(GLFWwindow* window, f64 xposIn, f64 ypos
     Callback* ev = static_cast<Callback*>(glfwGetWindowUserPointer(window));
     ev->m_WindowMousePosition.x = (f32)xposIn;
     ev->m_WindowMousePosition.y = (f32)yposIn;
-    ImGui_ImplGlfw_CursorPosCallback(window, xposIn, yposIn);
+    //ImGui_ImplGlfw_CursorPosCallback(window, xposIn, yposIn);
 }
 
 i32 Input::getKeyboard(u32 index)
@@ -253,9 +253,11 @@ Window::Window()
     ImGui_ImplOpenGL3_Init("#version 330");
     ImGuiIO& io = ImGui::GetIO();
     io.DisplaySize = ImVec2(callback.m_WindowSize.x, callback.m_WindowSize.y);
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
+    //io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
     ImGui_ImplGlfw_InitForOpenGL(p_Window, false);
-    ImGui_ImplGlfw_InstallCallbacksAdapter(p_Window);
+    ImGui_ImplGlfw_InstallCallbacks(p_Window);
 }
 
 Window::~Window()

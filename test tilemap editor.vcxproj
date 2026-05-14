@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -124,7 +124,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;_DEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
@@ -142,7 +142,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>GLEW_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions);GLEW_STATIC;GLEW_STATIC;; GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;$(SolutionDir)Dependencies\imgui;$(SolutionDir)Dependencies\imgui\backends</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui;C:\Users\D3032328\Downloads\Tilemap-editor-no-cmake\Dependencies\imgui-docking\imgui\backends</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
@@ -155,14 +155,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Dependencies\imgui\backends\imgui_impl_win32.cpp" />
-    <ClCompile Include="Dependencies\imgui\imgui.cpp" />
-    <ClCompile Include="Dependencies\imgui\imgui_demo.cpp" />
-    <ClCompile Include="Dependencies\imgui\imgui_draw.cpp" />
-    <ClCompile Include="Dependencies\imgui\imgui_tables.cpp" />
-    <ClCompile Include="Dependencies\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\imgui.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Dependencies\imgui-docking\multiPlot.cpp" />
     <ClCompile Include="src\EntryPoint.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\TilemapRender.cpp" />
@@ -170,16 +171,22 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Dependencies\imgui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="Dependencies\imgui\backends\imgui_impl_opengl3.h" />
-    <ClInclude Include="Dependencies\imgui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Dependencies\imgui\backends\imgui_impl_win32.h" />
-    <ClInclude Include="Dependencies\imgui\imconfig.h" />
-    <ClInclude Include="Dependencies\imgui\imgui.h" />
-    <ClInclude Include="Dependencies\imgui\imgui_internal.h" />
-    <ClInclude Include="Dependencies\imgui\imstb_rectpack.h" />
-    <ClInclude Include="Dependencies\imgui\imstb_textedit.h" />
-    <ClInclude Include="Dependencies\imgui\imstb_truetype.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\IconsForkAwesome.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imconfig.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imfilebrowser.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imgui.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imguiComboSearch.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imguiRowsBackground.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imguiThemes.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imgui_internal.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imstb_textedit.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\imstb_truetype.h" />
+    <ClInclude Include="Dependencies\imgui-docking\imgui\multiPlot.h" />
     <ClInclude Include="src\Allocator.h" />
     <ClInclude Include="src\BufferObject.h" />
     <ClInclude Include="src\Consts.h" />
