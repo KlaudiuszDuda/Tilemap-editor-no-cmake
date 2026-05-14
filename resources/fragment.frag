@@ -17,8 +17,8 @@ void main()
 {
     vec3 color =
         mix(
-            mix(corner0, corner1, vQuadUV.x),
             mix(corner2, corner3, vQuadUV.x),
+            mix(corner0, corner1, vQuadUV.x),
             vQuadUV.y
         );
 

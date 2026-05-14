@@ -1,5 +1,4 @@
-/out
-bin/
-build/
-/.vs
+/.vs/
 .idea/
+x64/
+test til.2ec53c4d

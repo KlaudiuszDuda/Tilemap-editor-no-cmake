@@ -27,10 +27,10 @@ ivec2 baseUVs[4] = ivec2[4](
 
 // Rotation lookup (no branches, fast)
 const int rotLUT[16] = int[16](
-    0, 1, 2, 3,
     2, 3, 0, 1,
     3, 2, 1, 0,
-    1, 0, 3, 2
+    1, 0, 3, 2,
+    0, 1, 2, 3
 );
 
 void main()
@@ -41,10 +41,9 @@ void main()
     int tileX = tile % atlasTileSize.x;
     int tileY = tile / atlasTileSize.x;
 
-    int rotation = int((textureData.x >> 8) & 3u);
-    int flip = int((textureData.x >> 10) & 1u);
+    int tileRotation = int((textureData.x >> 30) & 3u);
 
-    int rotatedIndex = rotLUT[rotation * 4 + quadVertexID];
+    int rotatedIndex = rotLUT[tileRotation * 4 + quadVertexID];
 
     ivec2 uv = baseUVs[rotatedIndex];
 
@@ -78,11 +77,6 @@ void main()
     
     int vx = gl_VertexID % 2;
     int vy = (gl_VertexID / 2) % 2;
-
-    if (flip == 1)
-    {
-        vx = 1 - vx;
-    }
 
     float x = float(gl_InstanceID % 8) + baseInstanceX * 8;
     float y = float(gl_InstanceID / 8) + baseInstanceY * 8;

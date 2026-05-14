@@ -43,7 +43,7 @@ public:
 	TilemapRender();
 	~TilemapRender();
 
-	void updateCamera();
+	void updateInput();
 	void updateCanvasEdit();
 
 	void saveTilemap();
@@ -73,7 +73,7 @@ private:
 	VertexArray<1> textureVertexArray;
 	Shader shader;
 
-	u32 texture;
+	u32 texture = 0;
 	int width, height;
 	int tileWidthAndHeight[2];
 
@@ -82,8 +82,8 @@ private:
 
 	Viewport camera;
 
-	char textureAtlasName[100];
-	char tilemapDataName[100];
+	char textureAtlasName[50];
+	char tilemapDataName[50];
 
 	std::string tilemapFile;
 };

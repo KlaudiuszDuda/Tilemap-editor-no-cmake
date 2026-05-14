@@ -145,7 +145,6 @@ i32 Input::getKeyboard(u32 index)
 
 i32 Input::getMouseButton(u32 index)
 {
-
     ImGuiIO& io = ImGui::GetIO();
 
     if (io.WantCaptureMouse)
@@ -180,6 +179,11 @@ void Input::UnmapInputFromAction(MappedInput mapping)
 
 bool Input::isActionActive(MappedInput mappedInput)
 {
+    ImGuiIO& io = ImGui::GetIO();
+
+    if (io.WantTextInput)
+        return 0;
+
     if (callback.m_InputData.digital[m_ActionMapping[static_cast<u32>(mappedInput)]] != 0)
     {
         return true;
