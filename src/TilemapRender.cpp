@@ -68,10 +68,6 @@ void TilemapRender::updateInput()
 	{
 		tileActionType = 1;
 	}
-	if (input.isActionActiveDigital(MappedInput::F, GLFW_PRESS))
-	{
-		tileActionType = 2;
-	}
 	if (input.isActionActiveDigital(MappedInput::C, GLFW_PRESS))
 	{
 		tileActionType = 3;
@@ -87,16 +83,16 @@ void TilemapRender::updateCanvasEdit()
 		glm::ivec3 floatMouseWorldPosition = (glm::ivec3)(window.getWorldMousePosition(camera) * glm::vec3(2.f, 2.f, 2.f));
 		u32 mouseWorldPositionX = mouseWorldPosition.x;
 		u32 mouseWorldPositionY = mouseWorldPosition.y;
-
+		
 		u32 mouseWorldChunkPositionX = mouseWorldPositionX / CHUNK_SIZE;
 		u32 mouseWorldChunkPositionY = mouseWorldPositionY / CHUNK_SIZE;
-
+		
 		u32 mouseWorldChunkPositionIndexX = mouseWorldPositionX % CHUNK_SIZE;
 		u32 mouseWorldChunkPositionIndexY = mouseWorldPositionY % CHUNK_SIZE;
-
+		
 		u32 mouseWorldChunkIndex = mouseWorldChunkPositionX + mouseWorldChunkPositionY * tilemapChunkSize[0];
 		u32 mouseWorldIndex = mouseWorldChunkPositionIndexX + mouseWorldChunkPositionIndexY * CHUNK_SIZE;
-
+		
 		u32 quadVertexIDX = floatMouseWorldPosition.x % 2;
 		u32 quadVertexIDY = floatMouseWorldPosition.y % 2;
 		u32 quadVertexID = quadVertexIDX + quadVertexIDY * 2;
@@ -135,19 +131,47 @@ void TilemapRender::updateCanvasEdit()
 			if (mouseWorldChunkPositionX < 0) return;
 			if (mouseWorldChunkPositionY < 0) return;
 
+			if (!GPUUploadQueue[mouseWorldChunkIndex].fence.IsNotSynced()) return;
+
 			u32 colorR = (u32)(colorSelected[0] * 255);
 			u32 colorG = (u32)(colorSelected[1] * 255);
 			u32 colorB = (u32)(colorSelected[2] * 255);
 
-			int shift = quadVertexID * 8;
-			u32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
+			i32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
+
+			i32 rotation = tilemapBuffer[TileIndex].textureData >> 30 & 3;
+			i32 rot = rotation;
+			i32 vertex = quadVertexID;
+			i32 shift;
+
+			if(rot == 3)
+			{
+				rotation = 2;
+				shift = ((rotation + quadVertexID) & 3) * 8;
+			}
+			if(rot == 1)
+			{
+				if (vertex == 1) quadVertexID = 3;
+				if (vertex == 3) quadVertexID = 1;
+				shift = ((rotation - quadVertexID) & 3) * 8;
+			}
+			if(rot == 2)
+			{
+				if (vertex == 0) quadVertexID = 3;
+				if (vertex == 1) quadVertexID = 0;
+				if (vertex == 2) quadVertexID = 1;
+				if (vertex == 3) quadVertexID = 2;
+				shift = ((rotation - quadVertexID) & 3) * 8;
+			}
+			else
+			{
+				shift = ((rotation + quadVertexID) & 3) * 8;
+			}
 
 			u32 R = (tilemapBuffer[TileIndex].R >> shift) & 255u;
 			u32 G = (tilemapBuffer[TileIndex].G >> shift) & 255u;
 			u32 B = (tilemapBuffer[TileIndex].B >> shift) & 255u;
 			if (R == colorR && G == colorG && B == colorB) return;
-
-			if (!GPUUploadQueue[mouseWorldChunkIndex].fence.IsNotSynced()) return;
 
 			tilemapBuffer[TileIndex].R =
 				(tilemapBuffer[TileIndex].R & ~(0xFFu << shift)) |
@@ -160,10 +184,6 @@ void TilemapRender::updateCanvasEdit()
 			tilemapBuffer[TileIndex].B =
 				(tilemapBuffer[TileIndex].B & ~(0xFFu << shift)) |
 				((colorB) << shift);
-
-			u32 red = tilemapBuffer[TileIndex].R >> shift & 255u;
-			u32 green = tilemapBuffer[TileIndex].G >> shift & 255u;
-			u32 blue = tilemapBuffer[TileIndex].B >> shift & 255u;
 
 			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
 
