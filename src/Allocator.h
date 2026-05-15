@@ -183,4 +183,85 @@ namespace kl
             return alloc(size);
         }
     };
+
+    template<u32 size>
+    class BucketGPUMemory
+    {
+    private:
+        Buffer<1> m_Buffer;
+        u32 m_BufferSize;
+        std::vector<u32> m_FreeBlocks;
+
+    public:
+        inline void init(u32 BucketAmount)
+        {
+            m_BufferSize = BucketAmount * size;
+            m_Buffer.BindBuffer(GL_ARRAY_BUFFER, 0);
+            m_Buffer.BufferData(GL_ARRAY_BUFFER, m_BufferSize, nullptr, GL_DYNAMIC_COPY);
+
+            m_FreeBlocks.clear();
+            for (i32 i = 0; i < BucketAmount; i++)
+            {
+                m_FreeBlocks.emplace_back(i * size);
+            }
+        }
+
+        inline Buffer<1>& getBuffer()
+        {
+            return m_Buffer;
+        }
+
+        inline u32 alloc() 
+        {
+            if (m_FreeBlocks.size())
+            {
+                u32 offset = m_FreeBlocks[0];
+                m_FreeBlocks[0] = m_FreeBlocks.back();
+                m_FreeBlocks.pop_back();
+                return offset;
+            }
+        }
+
+        inline u32 alloc_init(void* dst) 
+        {
+            if (m_FreeBlocks.size())
+            {
+                u32 offset = m_FreeBlocks[0];
+                m_FreeBlocks[0] = m_FreeBlocks.back();
+
+                memset((u8*)dst + offset, 0, size);
+
+                return offset;
+            }
+            return growAndAlloc();
+        }
+
+        inline void freeRegion(u32 offset) {
+            if (offset == 0u - 1) { return; }
+            m_FreeBlocks.emplace_back(offset);
+        }
+
+        u32 growAndAlloc() {
+            u32 oldSize = m_BufferSize;
+            u32 newSize = m_BufferSize * 2;
+
+            while (newSize - oldSize < size) {
+                newSize *= 2;
+            }
+
+            m_Buffer.BindBuffer(GL_ARRAY_BUFFER, 0);
+
+            void* temp = malloc(oldSize);
+            glGetBufferSubData(GL_ARRAY_BUFFER, 0, oldSize, temp);
+
+            glBufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_COPY);
+            glBufferSubData(GL_ARRAY_BUFFER, 0, oldSize, temp);
+            free(temp);
+
+            m_FreeBlocks.push_back({ oldSize, newSize - oldSize });
+            m_BufferSize = newSize;
+
+            return alloc();
+        }
+    };
 }

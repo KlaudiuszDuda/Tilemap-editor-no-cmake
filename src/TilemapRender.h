@@ -56,7 +56,8 @@ public:
 	void draw();
 
 private:
-	kl::ChunkBufferAllocator textureTileData;
+	//kl::ChunkBufferAllocator textureTileData;
+	kl::BucketGPUMemory<CHUNK_SIZE_SQUARED * sizeof(TextureData)> textureTileData;
 	std::vector<TextureData> tilemapBuffer;
 	std::vector<u32> tilemapChunkPointer;
 

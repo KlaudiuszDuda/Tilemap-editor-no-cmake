@@ -110,7 +110,7 @@ void TilemapRender::updateCanvasEdit()
 			u32 TileIndex = mouseWorldIndex + mouseWorldChunkIndex * CHUNK_SIZE_SQUARED;
 			tilemapBuffer[TileIndex].textureData = textureSelect;
 
-			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			u32 offset = textureTileData.alloc();
 
 			auto& buffer = textureTileData.getBuffer();
 
@@ -185,7 +185,7 @@ void TilemapRender::updateCanvasEdit()
 				(tilemapBuffer[TileIndex].B & ~(0xFFu << shift)) |
 				((colorB) << shift);
 
-			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			u32 offset = textureTileData.alloc();
 
 			auto& buffer = textureTileData.getBuffer();
 
@@ -233,7 +233,7 @@ void TilemapRender::updateCanvasEdit()
 			tilemapBuffer[TileIndex].textureData &= mask;
 			tilemapBuffer[TileIndex].textureData |= bits;
 
-			u32 offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+			u32 offset = textureTileData.alloc();
 
 			auto& buffer = textureTileData.getBuffer();
 
@@ -330,7 +330,7 @@ void TilemapRender::openTilemapFile(char* filename)
 		memset(tilemapChunkPointer.data(), 255, tilemapChunkPointer.size() * sizeof(u32));
 
 		textureVertexArray.bind(0);
-		textureTileData.init((tilemapChunkSize[0] * tilemapChunkSize[1] * 2) * CHUNK_SIZE_SQUARED * sizeof(TextureData));
+		textureTileData.init(tilemapChunkSize[0] * tilemapChunkSize[1] * 4);
 		GPUUploadQueue.resize(tilemapChunkSize[0] * tilemapChunkSize[1]);
 
 		textureVertexArray.EnableVertexAttribArray(0);
@@ -343,8 +343,7 @@ void TilemapRender::openTilemapFile(char* filename)
 	{
 		for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
 		{
-			kl::Block b = kl::Block(tilemapChunkPointer[i], CHUNK_SIZE_SQUARED * sizeof(TextureData));
-			textureTileData.freeRegion(b);
+			textureTileData.freeRegion(tilemapChunkPointer[i]);
 		}
 		memset(tilemapChunkPointer.data(), 255, tilemapChunkPointer.size() * sizeof(u32));
 	}
@@ -354,7 +353,7 @@ void TilemapRender::openTilemapFile(char* filename)
 
 	for (u32 i = 0; i < tilemapChunkSize[0] * tilemapChunkSize[1]; i++)
 	{
-		GPUUploadQueue[i].offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+		GPUUploadQueue[i].offset = textureTileData.alloc();
 		void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, GPUUploadQueue[i].offset, CHUNK_SIZE_SQUARED * sizeof(TextureData), flags);
 		memcpy(dst, tilemapBuffer.data() + GPUUploadQueue[i].offset / sizeof(TextureData), CHUNK_SIZE_SQUARED * sizeof(TextureData));
 		GPUUploadQueue[i].fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
@@ -384,7 +383,7 @@ void TilemapRender::newTilemapFile(char* filename)
 
 	for (u32 i = 0; i < tilemapChunkSize[0] * tilemapChunkSize[1]; i++)
 	{
-		GPUUploadQueue[i].offset = textureTileData.alloc(CHUNK_SIZE_SQUARED * sizeof(TextureData));
+		GPUUploadQueue[i].offset = textureTileData.alloc();
 		TextureData* dst = (TextureData*)buffer.MapBufferRange(GL_ARRAY_BUFFER, GPUUploadQueue[i].offset, CHUNK_SIZE_SQUARED * sizeof(TextureData), flags);
 		std::fill(dst, dst + CHUNK_SIZE_SQUARED, TextureData(0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF));
 		GPUUploadQueue[i].fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
@@ -417,8 +416,7 @@ void TilemapRender::draw()
 		{
 			if (tilemapChunkPointer[i] != 0u - 1)
 			{
-				kl::Block b = kl::Block(tilemapChunkPointer[i], CHUNK_SIZE_SQUARED * sizeof(TextureData));
-				textureTileData.freeRegion(b);
+				textureTileData.freeRegion(tilemapChunkPointer[i]);
 			}
 			tilemapChunkPointer[i] = GPUUploadQueue[i].offset;
 			GPUUploadQueue[i].fence.DeleteSync();
