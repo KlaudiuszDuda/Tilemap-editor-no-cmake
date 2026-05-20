@@ -38,6 +38,13 @@ struct TextureData
 	}
 };
 
+struct ChunkMetaData
+{
+	u32 offset;
+	i32 x;
+	i32 y;
+};
+
 class TilemapRender
 {
 public:
@@ -56,10 +63,10 @@ public:
 	void draw();
 
 private:
-	//kl::ChunkBufferAllocator textureTileData;
 	kl::BucketGPUMemory<CHUNK_SIZE_SQUARED * sizeof(TextureData)> textureTileData;
 	std::vector<TextureData> tilemapBuffer;
-	std::vector<u32> tilemapChunkPointer;
+	//std::unordered_map<glm::ivec2, ChunkMetaData> tilemapChunkPointer;
+	std::vector<ChunkMetaData> tilemapChunkPointer;
 
 	std::vector<GPUupload> GPUUploadQueue;
 

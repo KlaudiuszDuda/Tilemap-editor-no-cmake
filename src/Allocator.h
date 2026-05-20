@@ -6,6 +6,7 @@
 #include <GL/glew.h>
 #include <vector>
 #include <algorithm>
+#include "Syncing.h"
 
 namespace kl
 {
@@ -211,7 +212,7 @@ namespace kl
             return m_Buffer;
         }
 
-        inline u32 alloc() 
+        inline u32 alloc()
         {
             if (m_FreeBlocks.size())
             {
@@ -222,7 +223,7 @@ namespace kl
             }
         }
 
-        inline u32 alloc_init(void* dst) 
+        inline u32 alloc_init(void* dst)
         {
             if (m_FreeBlocks.size())
             {
@@ -249,17 +250,22 @@ namespace kl
                 newSize *= 2;
             }
 
-            m_Buffer.BindBuffer(GL_ARRAY_BUFFER, 0);
+            Buffer<1> newBuffer;
+            newBuffer.BindBuffer(GL_ARRAY_BUFFER, 0);
+            newBuffer.BufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_COPY);
 
-            void* temp = malloc(oldSize);
-            glGetBufferSubData(GL_ARRAY_BUFFER, 0, oldSize, temp);
+            m_Buffer.BindBuffer(GL_COPY_READ_BUFFER, 0);
+            newBuffer.BindBuffer(GL_COPY_WRITE_BUFFER, 0);
 
-            glBufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_COPY);
-            glBufferSubData(GL_ARRAY_BUFFER, 0, oldSize, temp);
-            free(temp);
+            glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, oldSize);
 
-            m_FreeBlocks.push_back({ oldSize, newSize - oldSize });
-            m_BufferSize = newSize;
+            i32 start = oldSize / size;
+            i32 end = newSize / size;
+
+            for (i32 i = start; i < end; i++)
+            {
+                m_FreeBlocks.emplace_back(i * size);
+            }
 
             return alloc();
         }

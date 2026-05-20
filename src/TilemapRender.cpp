@@ -68,6 +68,10 @@ void TilemapRender::updateInput()
 	{
 		tileActionType = 1;
 	}
+	if (input.isActionActiveDigital(MappedInput::F, GLFW_PRESS))
+	{
+		tileActionType = 2;
+	}
 	if (input.isActionActiveDigital(MappedInput::C, GLFW_PRESS))
 	{
 		tileActionType = 3;
@@ -327,7 +331,14 @@ void TilemapRender::openTilemapFile(char* filename)
 	if (!isInitialized)
 	{
 		tilemapChunkPointer.resize(tilemapChunkSize[0] * tilemapChunkSize[1]);
-		memset(tilemapChunkPointer.data(), 255, tilemapChunkPointer.size() * sizeof(u32));
+		for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
+		{
+			i32 x = i % tilemapChunkSize[0];
+			i32 y = i / tilemapChunkSize[0];
+			tilemapChunkPointer[i].offset = 0u - 1;
+			tilemapChunkPointer[i].x = x;
+			tilemapChunkPointer[i].y = y;
+		}
 
 		textureVertexArray.bind(0);
 		textureTileData.init(tilemapChunkSize[0] * tilemapChunkSize[1] * 4);
@@ -343,9 +354,9 @@ void TilemapRender::openTilemapFile(char* filename)
 	{
 		for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
 		{
-			textureTileData.freeRegion(tilemapChunkPointer[i]);
+			textureTileData.freeRegion(tilemapChunkPointer[i].offset);
+			tilemapChunkPointer[i].offset = 0u - 1;
 		}
-		memset(tilemapChunkPointer.data(), 255, tilemapChunkPointer.size() * sizeof(u32));
 	}
 
 	auto& buffer = textureTileData.getBuffer();
@@ -355,7 +366,7 @@ void TilemapRender::openTilemapFile(char* filename)
 	{
 		GPUUploadQueue[i].offset = textureTileData.alloc();
 		void* dst = buffer.MapBufferRange(GL_ARRAY_BUFFER, GPUUploadQueue[i].offset, CHUNK_SIZE_SQUARED * sizeof(TextureData), flags);
-		memcpy(dst, tilemapBuffer.data() + GPUUploadQueue[i].offset / sizeof(TextureData), CHUNK_SIZE_SQUARED * sizeof(TextureData));
+		memcpy(dst, tilemapBuffer.data() + i * CHUNK_SIZE_SQUARED, CHUNK_SIZE_SQUARED * sizeof(TextureData));
 		GPUUploadQueue[i].fence.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
 		buffer.UnmapBuffer(GL_ARRAY_BUFFER);
 	}
@@ -371,6 +382,13 @@ void TilemapRender::newTilemapFile(char* filename)
 	std::fill(tilemapBuffer.data(), tilemapBuffer.data() + tilemapBuffer.size(), TextureData(0, 0xFFFFFFFF, 0xFFFFFFFF, 0xFFFFFFFF));
 
 	tilemapChunkPointer.resize(tilemapChunkSize[0] * tilemapChunkSize[1]);
+	for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
+	{
+		i32 x = i % tilemapChunkSize[0];
+		i32 y = i / tilemapChunkSize[0];
+		tilemapChunkPointer[i].x = x;
+		tilemapChunkPointer[i].y = y;
+	}
 	memset(tilemapChunkPointer.data(), 255, tilemapChunkPointer.size() * sizeof(u32));
 
 	textureVertexArray.bind(0);
@@ -414,11 +432,11 @@ void TilemapRender::draw()
 
 		if (result == GL_ALREADY_SIGNALED || result == GL_CONDITION_SATISFIED)
 		{
-			if (tilemapChunkPointer[i] != 0u - 1)
+			if (tilemapChunkPointer[i].offset != 0u - 1)
 			{
-				textureTileData.freeRegion(tilemapChunkPointer[i]);
+				textureTileData.freeRegion(tilemapChunkPointer[i].offset);
 			}
-			tilemapChunkPointer[i] = GPUUploadQueue[i].offset;
+			tilemapChunkPointer[i].offset = GPUUploadQueue[i].offset;
 			GPUUploadQueue[i].fence.DeleteSync();
 		}
 	}
@@ -436,16 +454,16 @@ void TilemapRender::draw()
 		const Frustum camFrustum = createFrustumFromCamera(camera, window.getWindowSize().x / window.getWindowSize().y, glm::radians(camera.Fov), 0.1f, 100000.0f);
 		for (i32 i = 0; i < tilemapChunkPointer.size(); i++)
 		{
-			if (tilemapChunkPointer[i] == 0u - 1) return;
+			if (tilemapChunkPointer[i].offset == 0u - 1) return;
 
-			i32 x = i % tilemapChunkSize[0];
-			i32 y = i / tilemapChunkSize[0];
+			i32 x = tilemapChunkPointer[i].x;
+			i32 y = tilemapChunkPointer[i].y;
 
 			if (isAABBOnFrustum(setAABB({ x * CHUNK_SIZE, y * CHUNK_SIZE, 0 }, { (x + 1) * CHUNK_SIZE, (y + 1) * CHUNK_SIZE, 0 }), camFrustum))
 			{
 				textureVertexArray.VertexAttribI1i(1, x);
 				textureVertexArray.VertexAttribI1i(2, y);
-				textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(TextureData), (void*)(tilemapChunkPointer[i]));
+				textureVertexArray.VertexAttribIPointer(0, 4, GL_UNSIGNED_INT, sizeof(TextureData), (void*)(tilemapChunkPointer[i].offset));
 				textureVertexArray.DrawArraysInstanced(GL_TRIANGLE_STRIP, 0, 4, CHUNK_SIZE_SQUARED);
 			}
 		}
