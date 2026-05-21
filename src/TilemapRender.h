@@ -15,8 +15,20 @@
 
 struct GPUupload
 {
-	u64 offset;
+	u32 offset;
+	u32 chunkID;
 	Syncing fence;
+
+	GPUupload(u32 off, u32 id, Syncing sync)
+	{
+		offset = off;
+		chunkID = id;
+		fence = sync;
+	}
+	GPUupload()
+	{
+
+	}
 };
 
 struct TextureData
@@ -38,11 +50,35 @@ struct TextureData
 	}
 };
 
+struct TilemapChunkData
+{
+	TextureData data[CHUNK_SIZE_SQUARED];
+};
+
 struct ChunkMetaData
 {
 	u32 offset;
 	i32 x;
 	i32 y;
+};
+
+struct ChunkLookup
+{
+	u32 offset;
+	u32 id;
+};
+
+struct IVec2Hash
+{
+	std::size_t operator()(const glm::ivec2& v) const
+	{
+		std::size_t hash = 17;
+
+		hash = hash * 31 + std::hash<int>()(v.x);
+		hash = hash * 31 + std::hash<int>()(v.y);
+
+		return hash;
+	}
 };
 
 class TilemapRender
@@ -64,14 +100,15 @@ public:
 
 private:
 	kl::BucketGPUMemory<CHUNK_SIZE_SQUARED * sizeof(TextureData)> textureTileData;
-	std::vector<TextureData> tilemapBuffer;
-	//std::unordered_map<glm::ivec2, ChunkMetaData> tilemapChunkPointer;
+	std::vector<std::vector<TextureData>> tilemapBuffer;
+	std::unordered_map<glm::ivec2, ChunkLookup, IVec2Hash> tilemapChunkPointerLookup;
 	std::vector<ChunkMetaData> tilemapChunkPointer;
 
-	std::vector<GPUupload> GPUUploadQueue;
+	std::unordered_map<glm::ivec2,GPUupload,IVec2Hash> GPUUploadQueueLookup;
+	std::vector<glm::ivec2> GPUUploadQueue;
 
 	u32 textureSelect = 1;
-	glm::uvec3 colorChoosen = glm::uvec3(0xFF, 0x40, 0xFF);
+	glm::uvec3 colorChoosen = glm::uvec3(0xFF, 0xFF, 0xFF);
 	u32 tileActionType = 0;
 
 	bool isInitialized = false;
