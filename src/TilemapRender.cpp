@@ -359,15 +359,19 @@ void TilemapRender::openTilemapFile(char* filename)
 {
 	std::ifstream tilemapData;
 
-	tilemapFile = std::string("resources/") + filename + ".tmk";
-	tilemapData.open(tilemapFile, std::ios::binary | std::ios::in | std::ios::ate);
+	std::string tempString;
+	tempString = std::string("resources/") + filename + ".tmk";
+	tilemapData.open(tempString, std::ios::binary | std::ios::in | std::ios::ate);
 	if (!tilemapData) return;
+
+	tilemapFile = tempString;
 
 	std::streamsize size = tilemapData.tellg();
 	u32 amountOfChunks = (size - 100 + sizeof(int) * 2) / (CHUNK_SIZE_SQUARED * sizeof(TextureData) + sizeof(glm::ivec2));
 
 	tilemapData.seekg(0, std::ios::beg);
 
+	tilemapBuffer.clear();
 	tilemapBuffer.resize(amountOfChunks);
 	for (i32 i = 0; i < tilemapBuffer.size(); i++)
 	{
@@ -449,6 +453,12 @@ void TilemapRender::newTilemapFile(char* filename, u32 sizeX, u32 sizeY)
 	if (tilemapChunkSizeImGUI[0] <= 0 || tilemapChunkSizeImGUI[1] <= 0) return;
 	tilemapFile = std::string("resources/") + filename + ".tmk";
 	std::ofstream newFile(tilemapFile, std::ios::binary);
+
+	tilemapBuffer.clear();
+	tilemapBuffer.shrink_to_fit();
+	tilemapChunkPointer.clear();
+	tilemapChunkPointer.shrink_to_fit();
+	tilemapChunkPointerLookup.clear();
 
 	tilemapBuffer.resize(sizeX * sizeY);
 	for (i32 i = 0; i < tilemapBuffer.size(); i++)
@@ -536,6 +546,7 @@ void TilemapRender::draw()
 			GPUUploadQueue.pop_back();
 
 			auto tilemapChunkpointer = tilemapChunkPointerLookup.find(glm::ivec2(tilemapChunkPointer[index].x, tilemapChunkPointer[index].y));
+			if (tilemapChunkpointer == tilemapChunkPointerLookup.end()) return;
 			tilemapChunkpointer->second.offset = tilemapChunkPointer[index].offset;
 		}
 	}
