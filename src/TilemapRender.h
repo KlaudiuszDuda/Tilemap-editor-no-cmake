@@ -66,6 +66,12 @@ struct ChunkLookup
 {
 	u32 offset;
 	u32 id;
+
+	ChunkLookup(u32 off, u32 chunkID)
+	{
+		offset = off;
+		id = chunkID;
+	}
 };
 
 struct IVec2Hash
