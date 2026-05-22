@@ -584,7 +584,7 @@ void TilemapRender::draw()
 	{
 		tileActionType = 2;
 	}
-	if (ImGui::Button("RemoveChunk", ImVec2(50.f, 25.f)))
+	if (ImGui::Button("Remove", ImVec2(50.f, 25.f)))
 	{
 		tileActionType = 4;
 	}
