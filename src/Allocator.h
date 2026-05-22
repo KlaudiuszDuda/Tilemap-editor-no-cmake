@@ -221,6 +221,7 @@ namespace kl
                 m_FreeBlocks.pop_back();
                 return offset;
             }
+            return growAndAlloc();
         }
 
         inline u32 alloc_init(void* dst)
@@ -250,12 +251,14 @@ namespace kl
                 newSize *= 2;
             }
 
-            Buffer<1> newBuffer;
-            newBuffer.BindBuffer(GL_ARRAY_BUFFER, 0);
-            newBuffer.BufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_COPY);
+            GLuint newBuffer[1];
+
+            glGenBuffers(1, newBuffer);
+            glBindBuffer(GL_ARRAY_BUFFER, newBuffer[0]);
+            glBufferData(GL_ARRAY_BUFFER, newSize, nullptr, GL_DYNAMIC_COPY);
 
             m_Buffer.BindBuffer(GL_COPY_READ_BUFFER, 0);
-            newBuffer.BindBuffer(GL_COPY_WRITE_BUFFER, 0);
+            glBindBuffer(GL_COPY_WRITE_BUFFER, newBuffer[0]);
 
             glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, oldSize);
 
@@ -266,6 +269,8 @@ namespace kl
             {
                 m_FreeBlocks.emplace_back(i * size);
             }
+
+            m_Buffer.m_Buffer[0] = newBuffer[0];
 
             return alloc();
         }

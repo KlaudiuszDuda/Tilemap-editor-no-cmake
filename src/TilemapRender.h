@@ -60,6 +60,16 @@ struct ChunkMetaData
 	u32 offset;
 	i32 x;
 	i32 y;
+
+	ChunkMetaData(u32 off, i32 X, i32 Y)
+	{
+		offset = off;
+		x = X;
+		y = Y;
+	}
+	ChunkMetaData()
+	{
+	}
 };
 
 struct ChunkLookup
@@ -99,7 +109,7 @@ public:
 	void saveTilemap();
 	void sliceTextureAtlas(char* filename);
 	void openTilemapFile(char* filename);
-	void newTilemapFile(char* filename);
+	void newTilemapFile(char* filename, u32 sizeX, u32 sizeY);
 
 	void update();
 	void draw();
@@ -129,7 +139,7 @@ private:
 	int width, height;
 	int tileWidthAndHeight[2];
 
-	int tilemapChunkSize[2];
+	//int tilemapChunkSize[2];
 	int tilemapChunkSizeImGUI[2];
 
 	Viewport camera;

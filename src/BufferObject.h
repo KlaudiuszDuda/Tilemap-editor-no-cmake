@@ -113,6 +113,6 @@ public:
 
     inline u32 getBuffer(u32 i) const { return m_Buffer[i]; }
 
-private:
+public:
     u32 m_Buffer[nBuffers];
 };

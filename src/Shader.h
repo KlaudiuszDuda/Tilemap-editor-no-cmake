@@ -10,6 +10,8 @@
 
 #include "types.h"
 
+#define PRODUCTION_BUILD 0;
+
 class Shader
 {
 public:
