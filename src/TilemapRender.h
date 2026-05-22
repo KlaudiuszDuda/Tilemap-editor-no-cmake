@@ -139,7 +139,6 @@ private:
 	int width, height;
 	int tileWidthAndHeight[2];
 
-	//int tilemapChunkSize[2];
 	int tilemapChunkSizeImGUI[2];
 
 	Viewport camera;

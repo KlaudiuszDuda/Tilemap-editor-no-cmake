@@ -580,6 +580,14 @@ void TilemapRender::draw()
 	{
 		tileActionType = 1;
 	}
+	if (ImGui::Button("Expand", ImVec2(50.f, 25.f)))
+	{
+		tileActionType = 2;
+	}
+	if (ImGui::Button("RemoveChunk", ImVec2(50.f, 25.f)))
+	{
+		tileActionType = 4;
+	}
 
 	if (ImGui::BeginMainMenuBar())
 	{
