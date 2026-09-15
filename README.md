@@ -27,8 +27,6 @@ R – Toggle rotate tiles
 
 T – Toggle texture tiles mode
 
-Y – Toggle tint vertex colour mode
-
 C – Toggle colour tile vertices mode
 
 Z - delete tile chunk
