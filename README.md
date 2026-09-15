@@ -9,24 +9,43 @@ Features:
 Camera controls:
 
 A – Move the camera to the left
+
 D – Move the camera to the right
+
 S – Move the camera down
+
 A – Move the camera up
+
 Q – Zoom the camera out
+
 E - Zoom the camera in
 
+
 Tools controls:
+
 R – Toggle rotate tiles
+
 T – Toggle texture tiles mode
+
 Y – Toggle tint vertex colour mode
+
 C – Toggle colour tile vertices mode
+
 Z - delete tile chunk
+
 X - create tile chunk
+
 
 Left click – changes the state of a tile
 
 Third party libraries used:
+
 imgui-docking: UI
+
 GLM: math library
+
 GLEW: OpenGL
+
 GLFW: multi platform window
+
+
