@@ -44,6 +44,14 @@ GLM: math library
 
 GLEW: OpenGL
 
-GLFW: multi platform window
+GLFW: multi platform 
+
+built with:
+
+C++
+
+status:
+
+not working on it currently and the project is shit so there is alot of code to fix.
 
 
